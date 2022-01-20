@@ -41,10 +41,9 @@ This is a lot getting started, remember our goal here is exposure, not mastery. 
 
 **Learning goals: By the end of this chapter you should be able to get data  into `R` and explore it**. Specifically, students will be able to:
 
-- *Load data into `R` and make their own tibbles.*       
-- *[`filter`](https://dplyr.tidyverse.org/reference/filter.html), [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html), [`arrange`](https://dplyr.tidyverse.org/reference/arrange.html), and [`select`](https://dplyr.tidyverse.org/reference/select.html) data with the [`dplyr`](https://dplyr.tidyverse.org/) package.*   
-- *(Optional) Tidy data with the [`tidyr`](https://tidyr.tidyverse.org/) package.*   
-
+- *Make their own tibbles.*       
+- *[`filter`](https://dplyr.tidyverse.org/reference/filter.html), [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html), [`arrange`](https://dplyr.tidyverse.org/reference/arrange.html), and [`select`](https://dplyr.tidyverse.org/reference/select.html) data with the [`dplyr`](https://dplyr.tidyverse.org/) package.*     
+- *Pipe %>% these operations together.*    
 
 
 
@@ -86,52 +85,18 @@ include_app("https://rstudio.cloud/learn/primers/2.1")
 ```
 
 
-## Getting Data into `R`    
+## Entering data into `R`   
 
-Getting data into R is often the first challenge we run into in our first R analysis. The video (Fig: \@ref(fig:intoR)) and text below should help you get started. 
-
-
+In the next chapter, we will talk about loading data from a spreadsheet into R. Here we will focus on manually entering datasets in R. This is useful for small datasets for practice and quick analyses.
  
-```{r intoR, fig.cap='Getting data into R (6 in and 6 seconds).', echo=FALSE, out.extra = 'allowfullscreen', out.width="40%", out.extra='style="float:right; padding:10px"'}
-include_url("https://www.youtube.com/embed/d7gYc1o2M3c" , height = "200")
+```{r putIntoR, fig.cap='Making tibbles in R (6 in and 6 seconds).', echo=FALSE, out.extra = 'allowfullscreen', out.width="40%"}
+include_url("https://www.youtube.com/embed/d7gYc1o2M3c?start=34&end=95" , height = "200")
 ```
 
 
 
 
-
-### Loading data 
-
-
-
-Ideally, your data are stored as a `.csv`, and if so you can read data in with the [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function. `R` can deal with other formats as well. Notably, using the function [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows us to read data from *Excel*, and can take the Sheet of interest as an argument in this function. 
-
-Here's an example of how to read data into `R`.
-
-```{r, eval=FALSE}
-library(tidyverse)
-toad_data <- read_csv(file = "science_projects/Toads/data/toad_data.csv")
-```
-
-The bit that says `science_projects/Toads/data/` points `R` to the correct folder, while `toad_data.csv` refers to the file we're reading into `R` and assigning to `toad_data`. Using tab-completion in RStudio makes finding our way to the file less terrible. <span style="color: lightgrey;"> But you can also point and click your way to data (see below). If you do, be sure to copy and paste the code you see in the code preview into the script so you can recreate your analysis.</span>.
-  
-
-
-```{r fig.cap='', echo=FALSE}
-#knitr::include_graphics('images/loadingdata.jpeg')
-```
-
-
-```{block2, type='rmdtip'}
-As above, best practices for loading data make use of R [projects](https://r4ds.had.co.nz/workflow-projects.html), so feel free to learn more. But for now, we're focused on *good enough* practices. 
-```
-
-
-
-
-### Entering data into `R` 
-
-We can create tibbles manually. I present the simplest and most common way this is done.  
+There are a bunch of ways we can create tibbles manually. I present the simplest and most common way this is done.  
 
 ```{r}
 toad_data <- tibble(             # This makes the data
@@ -152,8 +117,8 @@ Feel free to [read about more ways to make tibbles](https://r4ds.had.co.nz/tibbl
 
 
 
-```{r Tips04, fig.cap='**Watch [this video](https://www.youtube.com/watch?v=91LmBj29-Sc)** introducing `dplyr` (watch the frist 5 min and 9 sec), from [STAT 545](https://stat545.com/) -- a grad level data science class at the University of British Columbia. We will borrow from this course occasionally.', echo=FALSE, out.extra= 'allowfullscreen'}
-include_url("https://www.youtube.com/embed/Gms3zSPqCk8?end=309")
+```{r Tips04, fig.cap='**Watch [this video](https://www.youtube.com/watch?v=91LmBj29-Sc)** introducing `dplyr`, from [STAT 545](https://stat545.com/) -- a grad level data science class at the University of British Columbia. We will borrow from this course occasionally.', echo=FALSE, out.extra= 'allowfullscreen'}
+include_url("https://www.youtube.com/embed/Gms3zSPqCk8")
 ```
 
 
@@ -275,12 +240,60 @@ Some things we do in `R` require vectors to be pulled out of tibbles. We can ach
 
 
 
+## The pipe `%>%` operator  
+
+In the previous section we learned how to do a bunch of things to data. For example, in our toad dataset, below, we   
+
+- Use the [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function made a new column for `BMI` by dividing weight by height.  
+- Sort the data with the [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) function.  
+
+We also saw how we could [`select()`](https://dplyr.tidyverse.org/reference/select.html) columns, and [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) for rows based on logical statements.      
+
+**We did each of these things one at a time, often reassigning variables a bunch. Now, we see a better way, we combine operations with the pipe `%>%` operator.**
+
+
+
+Say you want to string together a few things -- like you want make a new tibble, called `sorted_bufo_bufo` by:    
+
+- Only retaining *Bufo bufo* samples        
+- Calculating `BMI`      
+- Sorting by BMI,  and   
+- Getting rid of the column with the species name. 
+
+The pipe operator, [`%>%`](https://magrittr.tidyverse.org/reference/pipe.html), makes this pretty clean by allowing us to pass results from one operation to another.  
+
+[`%>%`](https://magrittr.tidyverse.org/reference/pipe.html) basically tells R to take the data and keep going!  
+
+
+
+
+```{r, eval=FALSE}
+sorted_bufo_bufo <- toad_data     %>% # initial data
+  filter(species == "Bufo bufo")  %>% # only Bufo bufo
+  mutate(BMI = height / weight)   %>% # calculate BMI
+  arrange(BMI)                    %>% # sort by BMI
+  dplyr::select(-species)             # remove species
+
+sorted_bufo_bufo
+```
+
+```{r, echo=FALSE}
+sorted_bufo_bufo <- toad_data     %>% # initial data
+  filter(species == "Bufo bufo")  %>% # only Bufo bufo
+  mutate(BMI = height / weight)   %>% # calculate BMI
+  arrange(BMI)                    %>% # sort by BMI
+  dplyr::select(-species)             # remove species
+
+sorted_bufo_bufo %>%
+  kable()
+```
+
+
 ### Second primer   
 
 
 ***Now is a great time to complete the [Primer on isolating data with dplyr](https://rstudio.cloud/learn/primers/2.2)***,  embedded below (Fig. \@ref(fig:primer22)).   
 
-Note - we won't be working on the last part `%>%` aka 'piping' until next class so, you can put that off for a few days.   
 
 
 ```{r primer22, fig.cap = 'The RStudio [Primer on isolating data with dplyr](https://rstudio.cloud/learn/primers/2.2)', echo=FALSE} 
@@ -328,26 +341,15 @@ knitr::include_app('https://brandvain.shinyapps.io/datainr/', height = '500px')
 ```
 
 
-## Functions covered  in *Collecting and storing data + handling and visualizing it in `R`* 
+## Functions covered  in *Handlign data in `R`* 
+
 All require the tidyverse package
 
-
-### Functions for loading, formatting, and exploring data  
 
 ```{block2, type='rmdcode'}
 [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html): Entering data as a tibble. Give each column a name and assign its values with an equals sign, =. Separate columns with a comma ,.   
 [`glimpse()`](https://tibble.tidyverse.org/reference/glimpse.html): Show the name of every column in your data frame, as well as their class and first few values.      
-[`view()`](https://tibble.tidyverse.org/reference/view.html):   Look at your entire tibble as a scrollable spreadsheet.   
-[`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html):  Reads a dataset saved as a .csv into R.  
-[`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html): Reads a  dataset saved as a .xlsx into R. You can also specify the sheet with *sheet =*.   
-[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html): Allows use to tidy data.    
-[`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html): Allows use to go from tidy to wide data.   
-```
-
-
-### Functions for dealing with data   
-
-```{block2, type='rmdcode'}
+[`view()`](https://tibble.tidyverse.org/reference/view.html):   Look at your entire tibble as a scrollable spreadsheet.    
 [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html): Add a new column, usually as some function of existing columns.   
 [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html): Sort rows from low to high (or from high to low with `arrange(`[`desc()`](https://dplyr.tidyverse.org/reference/desc.html)`)`) values of a specified column.     
 [`filter()`](https://dplyr.tidyverse.org/reference/filter.html):  Limit your dataset to those with certain values in specifed columns.  

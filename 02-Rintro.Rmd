@@ -356,7 +356,7 @@ include_graphics("images/makingaproject.jpeg")
 library(tidyverse)
 ```
 
-## Observations and suggeastions for learning R / computer stuff   
+## Observations and suggestions for learning R / computer stuff   
 
 Teaching this class for years, I've learned a few things about leaning R that you should know.  
 

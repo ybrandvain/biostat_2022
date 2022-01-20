@@ -3,3 +3,5 @@ _book
 packages.bib
 images/dedication.lyx
 .Rproj.user
+.dcf
+.html

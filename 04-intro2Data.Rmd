@@ -23,6 +23,7 @@ include_url("https://www.youtube.com/embed/TPWPzrzY_1M",height = "200")
 - Describe best principles for collecting, storing, and maintaining data.    
 - Explain why these are good ideas.     
 - Differentiate between *tidy* and *messy*  data.  
+- Load data into R using a project
 
 
 
@@ -221,6 +222,52 @@ include_graphics("images/applied_biostats_folder.jpeg")
 ```
 
 
+
+## Loading A Spreadsheet into `R`    
+
+Getting data into R is often the first challenge we run into in our first R analysis. The video (Fig: \@ref(fig:intoR)) and text below should help you get started. 
+
+
+ 
+```{r intoR, fig.cap='Getting data into R (5 in and 10 seconds).', echo=FALSE, out.extra = 'allowfullscreen', out.width="40%", out.extra='style="float:right; padding:10px"'}
+include_url("https://www.youtube.com/embed/d7gYc1o2M3c?start=94" , height = "200")
+```
+
+
+
+
+
+Ideally, your data are stored as a `.csv`, and if so you can read data in with the [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function. `R` can deal with other formats as well. Notably, using the function [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows us to read data from *Excel*, and can take the Sheet of interest as an argument in this function. 
+
+
+
+Here's an example of how to read data into `R`.  
+To start we open `Toads.Rproj` by either 
+
+- Opening RStudio by opening `Toads.Rproj` or
+- Clicking `File` and navigating to `Open project` once RStudio is open.   
+
+```{r, eval=FALSE}
+library(tidyverse)
+toad_data <- read_csv(file = "data/toad_data.csv")
+```
+
+Opening `Toads.Rproj` tells RStudio that this is our home base.  The bit that says `data/` points `R` to the correct folder in our base, while `toad_data.csv` refers to the file we're reading into `R`.   The assignment operator `<-` assignins this to `toad_data`.  Using tab-completion in RStudio makes finding our way to the file less terrible. <span style="color: lightgrey;"> But you can also point and click your way to data (see below). If you do, be sure to copy and paste the code you see in the code preview into the script so you can recreate your analysis.</span>.
+  
+
+
+```{r fig.cap='', echo=FALSE}
+#knitr::include_graphics('images/loadingdata.jpeg')
+```
+
+
+```{block2, type='rmdtip'}
+As above, best practices for loading data make use of R [projects](https://r4ds.had.co.nz/workflow-projects.html), so feel free to learn more. But for now, we're focused on *good enough* practices. 
+```
+
+
+
+
 ## Tidying  messy data   
 
 
@@ -233,7 +280,7 @@ knitr::include_graphics('https://github.com/allisonhorst/stats-illustrations/raw
 
 
 
-In Ch. \@ref(data1), we saw that it is best to keep data in a tidy format, and in Section \@ref(tidyverse) we noted that Tidyverse tools have a unified grammar and data structure.  From the name, tidyverse, you could probably guess that tidyverse tools require tidy data -- data in which every variable is a column and each observation is a row. What if the data you loaded  are untidy? The [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function in the [`tidyr`](https://tidyr.tidyverse.org/) package (which loads automatically with tidyverse) can help! Take this example dataset, about `grades` in last year's course. 
+Above, we said it is best to keep data in a tidy format, and in Section \@ref(tidyverse) we noted that Tidyverse tools have a unified grammar and data structure.  From the name, tidyverse, you could probably guess that tidyverse tools require tidy data -- data in which every variable is a column and each observation is a row. What if the data you loaded  are untidy? The [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function in the [`tidyr`](https://tidyr.tidyverse.org/) package (which loads automatically with tidyverse) can help! Take this example dataset, about `grades` in last year's course. 
 
 ```{r, echo=FALSE}
 grades <- tibble(
@@ -288,6 +335,32 @@ The assignment is to be turned in on [canvas](https://canvas.umn.edu/courses/225
 ```{r, echo=FALSE}
 knitr::include_app('https://brandvain.shinyapps.io/intro2data/', height = '500px')
 ```
+
+
+## Functions covered  in *Handlign data in `R`* 
+
+All require the tidyverse package
+
+
+```{block2, type='rmdcode'}
+[`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html):  Reads a dataset saved as a .csv into R.  
+[`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html): Reads a  dataset saved as a .xlsx into R. You can also specify the sheet with *sheet =*.   
+[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html): Allows use to tidy data.    
+[`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html): Allows use to go from tidy to wide data.   
+
+```
+
+
+
+### tidyr cheat sheet
+
+There is no need to memorize anything, check out this [handy cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/tidyr.pdf)!
+
+```{r fig.cap='download the [tidyr cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/tidyr.pdf)', echo=FALSE}
+knitr::include_graphics('https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/tidyr.png')
+```
+
+
 
 
 
