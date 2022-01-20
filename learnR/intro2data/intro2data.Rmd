@@ -1,0 +1,145 @@
+---
+title: "Intro to data Quiz"
+author: "Yaniv Brandvain"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(ggmosaic)
+library(praise)
+iris <- tibble(iris)
+ukgas<- data.frame(year = 1960:1986,matrix(c(UKgas), ncol = 4,byrow = TRUE))
+names(ukgas) <- c("year","quarter_1", "quarter_2", "quarter_3", "quarter_4")
+ukgas <- tibble(ukgas)
+knitr::opts_chunk$set(echo = FALSE)
+toad_data <- tribble(~individual,~species,~sound,~weight,~height,
+        "a", "Bufo spinosus", "chirp", 2.0,	2,
+        "b",	"bufo bufo",	"croak",	2.6,	3,
+        "c",	"Bufo bufo",	"ribbit",	3.0,	2)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Intro to Data quiz  
+
+Complete this quiz to evaluate your comprehension of the material
+A similar, if not identical quiz should be completed for credit on canvas.
+
+
+### Q1: Entering data
+
+
+```{r, echo=FALSE,out.width='40%'}
+include_graphics("https://github.com/ybrandvain/biostat/blob/master/images/bad_names.jpeg?raw=true",)   
+```
+
+
+```{r enterdata, echo=FALSE}
+question("Which of the spreadsheets above uses best practices for entering data in the life_history column",
+  answer("A"),
+  answer("B", correct = TRUE),
+  correct = random_praise(),
+  incorrect = random_encouragement(),
+  allow_retry = TRUE
+)
+```
+
+### Q2: Which is tidy?
+
+
+```{r, echo=FALSE,out.width='40%'}
+include_graphics("https://github.com/ybrandvain/biostat/blob/master/images/tidy.jpeg?raw=true",)   
+```
+
+```{r whichistidy, echo=FALSE}
+question("Which of the spreadsheets above is tidy?",
+  answer("A", correct = TRUE),
+  answer("B"),
+  correct = random_praise(),
+  incorrect = random_encouragement(),
+  allow_retry = TRUE
+)
+```
+
+
+### Q3: Naming columns
+
+
+
+
+```{r, echo=FALSE,out.width='40%'}
+include_graphics("https://github.com/ybrandvain/biostat/blob/master/images/name4things.jpeg?raw=true",)   
+```
+
+```{r colnames, echo=FALSE}
+question("Which of the spreadsheets has a bad column name?",
+  answer("A"),
+  answer("B", correct = TRUE),
+  correct = random_praise(),
+  incorrect = random_encouragement(),
+  allow_retry = TRUE
+)
+```
+
+
+### Q4: Best practices in spreadsheets 
+
+We just discussed best practices in making spreadsheets. Imgine someone messed up in data entry, so our `toad_data` from last chapter looks like this.    
+
+```{r, echo=FALSE}
+toad_data
+```
+
+If I then filter for `Bufo bufo`
+
+```{r, echo=TRUE}
+filter(toad_data, species == "Bufo bufo")
+```
+
+
+
+```{r spreadsheets, echo=FALSE}
+question("Which rule for making good spreadsheets did I break and why does it matter?",
+    answer("Values where implied, so I missed relevant context"),
+    answer("Difficult to understand column names made it hard to get the species column right"),
+    answer("We used color to contain information, which is lost in R"),
+    answer("Species names where inconsistent, so we didn't appropriately filter our data", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+### Q5: Tidying data
+
+Let's have a  [`glimpse`](https://tibble.tidyverse.org/reference/glimpse.html) at data for gas consumption in the UK by quarter over years
+
+```{r}
+glimpse(ukgas)
+```
+
+These data are not tidy! Each observation is a quarter of a year, and the variables are -- `year`, `quarter`, and `gas` let's tidy theme with the [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function.
+
+```{r, echo=TRUE}
+pivot_longer(data = ukgas, 
+             cols = c("quarter_1", "quarter_2", "quarter_3", "quarter_4"),
+             names_to = "quarter", 
+             names_prefix = "quarter_",
+             values_to = "gas") %>%
+  head(n = 6)
+```
+
+
+
+```{r tidying, echo=FALSE}
+question("Looking at the code above (and perhaps remembering the video), guess what `names_prefix = 'quarter_'`, does?.",
+    answer("Moves quarter_ from values in a cell to the column  name"),
+    answer("Removes `quarter_`, from `quarter_1`,`quarter_2`, `quarter_3`, and `quarter_4`.", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
