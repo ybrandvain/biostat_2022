@@ -112,7 +112,7 @@ To a statistician the TRUTH is a **population** -- *a collection of all individu
 
 However, it is often impractical or impossible to study every individual in a population. As such, we often deal with a **sample** -- *a subset of a population*. We characterize a sample by taking an **estimate** of population parameters.
 
-So a major goal of a statistical analysis is how to go from conclusions about a sample which we can measure and observe, to the population(s) we care about. In doing so we must worry about random differences between a sample and a population (known as [Sampling Error](#samplingError), as well as any systematic issues in our sampling or measuring procedure which will cause estimates to reliably differ from the population (known as [Sampling Bias](#samplingBias)).
+So a major goal of a statistical analysis is how to go from conclusions about a sample which we can measure and observe, to the population(s) we care about. In doing so we must worry about random differences between a sample and a population (known as [Sampling Error](#samplingError)), as well as any systematic issues in our sampling or measuring procedure which will cause estimates to reliably differ from the population (known as [Sampling Bias](#samplingBias)).
 
 
 ```{block2, type='rmdnote'}
@@ -141,10 +141,10 @@ For example, non-randomly selected individuals will likely differ from the popul
 
 
 
-Another devious form of bias is known as **survivorship bias**, in which survivors differ from a population in critical ways. For example, students at the University of Minnesota likely had higher high school GPAs than a random sample of individuals from across the twin cities of the same age.
+Another devious form of bias is known as **survivorship bias**, in which survivors differ from a population in critical ways. For example, students at the University of Minnesota likely had higher high school GPAs than a random sample of individuals from across the Twin Cities of the same age.
 
 
-```{r, echo=FALSE,fig.cap ='Image from [wikipedia](https://en.wikipedia.org/wiki/Survivorship_bias)', out.width='30%', out.extra='style="float:right; padding:10px"'}
+```{r, echo=FALSE,fig.cap ='Image from [Wikipedia](https://en.wikipedia.org/wiki/Survivorship_bias)', out.width='30%', out.extra='style="float:right; padding:10px"'}
 include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Survivorship-bias.png/256px-Survivorship-bias.png")
 ```  
 
@@ -156,7 +156,7 @@ This is a good time to remember to read pages 38-44 and 104-112 [available here]
 
 
 ### (Non) independence  {-}  
-Most (intro) stats assumes that samples are independent. If observations in a sample are *independent of on another, the probability that one individual is studied is unrelated to the probability that any other individual is studied*. While this is desirable, it is sometimes impossible, so we address methods for accommodating non-independence later in the term.
+Most (intro) stats assumes that samples are independent. If observations in a sample are *independent of one another, the probability that one individual is studied is unrelated to the probability that any other individual is studied*. While this is desirable, it is sometimes impossible, so we address methods for accommodating non-independence later in the term.
 
 
 ##  Models and Hypothesis Testing
@@ -237,7 +237,7 @@ include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master
 
 The third major goal of statistics (in addition to estimation and hypothesis testing) is inferring causation.
 
-**What is a cause?**    Like so much of statistics, understanding causation requires an healthy dose of our imagination.   Specifically, we imagine multiple worlds. For example, we can imagine a world in which there was some treatment (e.g. we drank coffee, we got a vaccine, we raised taxes etc) and one in which that treatment was absent (e.g. we didn’t have coffee, we didn't raise taxes etc), and we then follow some response variable of interest. We say that the treatment is a cause of the outcome if changing it will change the outcome, on average.    <span style="color: LightGrey;"> Note for quantitative treatments, we can imagine a bunch of worlds where the treatments was modified by some quantitative value. </span>
+**What is a cause?**    Like so much of statistics, understanding causation requires a  healthy dose of our imagination.   Specifically, we imagine multiple worlds. For example, we can imagine a world in which there was some treatment (e.g. we drank coffee, we got a vaccine, we raised taxes etc) and one in which that treatment was absent (e.g. we didn’t have coffee, we didn't raise taxes etc), and we then follow some response variable of interest. We say that the treatment is a cause of the outcome if changing it will change the outcome, on average.    <span style="color: LightGrey;"> Note for quantitative treatments, we can imagine a bunch of worlds where the treatments was modified by some quantitative value. </span>
 
 
 In causal inference, considering the outcome if we had changed a treatment is called *counterfactual thinking*, and it is critical to our ability to think about causes.  
@@ -249,7 +249,7 @@ In causal inference, considering the outcome if we had changed a treatment is ca
 Say we saw a strong association between smoking and lung cancer from an observational study, and wanted to know if smoking causes cancer. 
 
 
-```{r simplecause, fig.cap = "We could represent this causal claim with the simplest causal graph we can imagine. This is our first formal introduction to a Directed Acyclic Graph (herefater DAG). This is *Directed* because **WE** are pointing a causal arrow from smoking to cancer. It is acyclic because causality in these models only flows in one direction, and its a graph because we are looking at it. These DAGs are the backbone of causal thinking because they allow us to lay our causal models out there for the world to see. Here we will largely use DAGs to consider potential causal paths, but these can be used for mathematical and statistical analyses.", echo=FALSE, fig.width=2.5, fig.height=2.5  ,out.extra='style="float:right; padding:10px"'}
+```{r simplecause, fig.cap = "We could represent this causal claim with the simplest causal graph we can imagine. This is our first formal introduction to a Directed Acyclic Graph (hereafter DAG). This is *Directed* because **WE** are pointing a causal arrow from smoking to cancer. It is acyclic because causality in these models only flows in one direction, and its a graph because we are looking at it. These DAGs are the backbone of causal thinking because they allow us to lay our causal models out there for the world to see. Here we will largely use DAGs to consider potential causal paths, but these can be used for mathematical and statistical analyses.", echo=FALSE, fig.width=2.5, fig.height=2.5  ,out.extra='style="float:right; padding:10px"'}
 dag.1 <- dagitty("dag{smoke -> cancer}")
 ggdag_canonical(dag.1, layout = "circle",node_size = 12,label_size = 10,text_size = 2.5)+theme_tufte()+
   theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(), axis.line = element_line(color = "lightgrey"), axis.line.x.top = element_line(color = "lightgrey"), axis.line.y.right =  element_line(color = "lightgrey"))
@@ -283,13 +283,13 @@ In the specifics of this case, Fisher turned out to be quite wrong -- genes do i
 
 I've introduced two DAGs so far.    
 
-- Figure \@ref(fig:simplecause) is a causal model of smoking causing lung cancer. Note this does it mean that nothing else causes lung cancer, or that everyone who smokes will get lung cancer, or that no one who doesn't smoke will get lung cancer. Rather, it means that if we copied each person, ad had one version of them smoke and the other not, there would be more cases of lung cancer in the smoking clones than the nonsmoking clones. 
+- Figure \@ref(fig:simplecause) is a causal model of smoking causing lung cancer. Note this does it mean that nothing else causes lung cancer, or that everyone who smokes will get lung cancer, or that no one who doesn't smoke will get lung cancer. Rather, it means that if we copied each person, and had one version of them smoke and the other not, there would be more cases of lung cancer in the smoking clones than the nonsmoking clones. 
 
 - Figure \@ref(fig:smokeconfound) presents Fisher's argument that smoking does not cause cancer and that rather, both smoking and cancer are influenced by a common cause -- genetics.  
 
 These are not the only plausible causal models for an association between smoking and cancer. I present three other possibilities in Figure \@ref(fig:allthesmoke).   
 
-- A **pipe**  is presented in Figure \@ref(fig:allthesmoke)a. That is -- genes cause smoking and smoking causes cancer. Empirically and statistically, this is a hard model to evaluate because changing genes would "cause" cancer in an experiment, and "controlling for genetics" by including it in a linear model would hide the effect of smoking. The right thing to do is to ignore the genetic component -- but that feels wrong and how do we justify it?   One way to get at this s to "match" on genetics and then compare outcomes for cancer. A [2017 study](https://thorax.bmj.com/content/72/11/1021.short) compared the incidence of lung cancer between monozygotic twins for which one smoked and one did not, and found a higher incidence of cancer in the smoking twin [@hjelmborg2017].     
+- A **pipe**  is presented in Figure \@ref(fig:allthesmoke)a. That is -- genes cause smoking and smoking causes cancer. Empirically and statistically, this is a hard model to evaluate because changing genes would "cause" cancer in an experiment, and "controlling for genetics" by including it in a linear model would hide the effect of smoking. The right thing to do is to ignore the genetic component -- but that feels wrong and how do we justify it?   One way to get at this is to "match" on genetics and then compare outcomes for cancer. A [2017 study](https://thorax.bmj.com/content/72/11/1021.short) compared the incidence of lung cancer between monozygotic twins for which one smoked and one did not, and found a higher incidence of cancer in the smoking twin [@hjelmborg2017].     
 - A **collider** is presented in Figure  \@ref(fig:allthesmoke)b, as both genes and smoking cause cancer (they "collide"). Here there are two "paths" between smoking and cancer. 1. The *front door* causal path -- smoking causes cancer, and 2.  The *back door* non causal path in connecting smoking to cancer via the confounding variable, genetics.   Here the challenge is to appropriately partition and attribute causes.    
 - A more complex and realistic model including the effects of the environment on cancer and smoking is presented in \@ref(fig:allthesmoke)c. Note that, in this model genes do not cause the environment and the environment does not cause genes.   
 
@@ -333,7 +333,7 @@ However, some caution is warranted here -- a causal relationship in a controlled
 
 
 
-For example, the finding that people who smoke are more likely to get cancer comes from many**observational studies**. *In an observational study, treatments are not randomly assigned to individuals*. Therefore, **confounding variables** -- *unmodelled variables which distort the relationship between explanatory and response variables -- can bias our interpretation*. A simple  association between smoking and lung cancer might suggest smoking causes lung cancer, or both are caused by stress, or genetics or whatever.  We therefore must show extreme caution when attempting to learn about causation from observational studies. However, the rapidly developing field of causal inference is establishing a set of approaches that can help us disentangle correlation and causation. 
+For example, the finding that people who smoke are more likely to get cancer comes from many **observational studies**. *In an observational study, treatments are not randomly assigned to individuals*. Therefore, **confounding variables** -- *unmodelled variables which distort the relationship between explanatory and response variables -- can bias our interpretation*. A simple  association between smoking and lung cancer might suggest smoking causes lung cancer, or both are caused by stress, or genetics or whatever.  We therefore must show extreme caution when attempting to learn about causation from observational studies. However, the rapidly developing field of causal inference is establishing a set of approaches that can help us disentangle correlation and causation. 
 
 So to distinguish between the claim that smoking causes cancer and Fisher's claim that genetics is a  confound and that smoking does not cause cancer, he could randomly assign some people to smoke and some to not. Of course, this is not feasible for both ethical and logistical reasons, so we need some way to work through this. The DAGs provide one way to aid in our thinking. For example, writing down a (few) DAGs can help us think through causes better and develop new hypotheses to distinguish causes. If we proposed genetics was a common cause of smoking and lung cancer, we could conduct an observational study of pairs of twins with one smoker and one nonsmoker and compare the probability of lung cancer in the smoker and nonsmoker. In fact, as discussed above [@hjelmborg2017] conducted such an experiment and ruled out Fisher's explanation.  
 

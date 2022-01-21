@@ -51,7 +51,7 @@ What's more, I believe this content is more important now than it has ever been,
 tweet_embed("https://twitter.com/LucyStats/status/1086757516674039813")
 ```
 
-My motivating goal for this course is to empower you to produce, present, and critically evaluate statistical evidence — especially as applied to biological topics. You should know that stats models are only models and that models are imperfect abstractions of reality. Yu should be able to think about jhow a biological question could be formulated as a statistical question, present graphs which show how data speak to this question, be aware of any shortcomings of that model, and how statistical analysis of a data set can be brought back into our biological discussion.
+My motivating goal for this course is to empower you to produce, present, and critically evaluate statistical evidence — especially as applied to biological topics. You should know that stats models are only models and that models are imperfect abstractions of reality. You should be able to think about how a biological question could be formulated as a statistical question, present graphs which show how data speak to this question, be aware of any shortcomings of that model, and how statistical analysis of a data set can be brought back into our biological discussion.
 
 *"By the end of this course...*  
 
@@ -101,7 +101,7 @@ I hope that this book provides clear and useful background for the course, and I
 
 Note that this 'book' is not the entirety of the course content, and is not an original piece of my own effort -- in addition from lifting from a few other course online (with attribution), I also make heavy use of these texts:  
 
-- *The Analysis of Biological Data Third Edition [@whitlock2020]:* This is the official book of this course, and is a standard biostats textbook, with many [useful resources](https://whitlockschluter3e.zoology.ubc.ca/) available online. The writing is great, as are the examples. Most of my material originates here (although I occasionally do things a bit differently). This book is officially optional, but students consistently ell me that it is extremely helpful. So, I highly recommend buying it. You can get the newest edition [here](https://www.macmillanlearning.com/college/us/product/Analysis-of-Biological-Data/p/131922623X), but any edition will be pretty useful.   
+- *The Analysis of Biological Data Third Edition [@whitlock2020]:* This is the official book of this course, and is a standard biostats textbook, with many [useful resources](https://whitlockschluter3e.zoology.ubc.ca/) available online. The writing is great, as are the examples. Most of my material originates here (although I occasionally do things a bit differently). This book is officially optional, but students consistently tell me that it is extremely helpful. So, I highly recommend buying it. You can get the newest edition [here](https://www.macmillanlearning.com/college/us/product/Analysis-of-Biological-Data/p/131922623X), but any edition will be pretty useful.   
 
 - *Calling Bullshit [@bergstrom2020]:* This book is not technical, but points to the big picture concerns of statisticians. It is very practical and well written. I will occasionally assign readings from this book, and/or point you to videos on their [website](https://www.callingbullshit.org/videos.html). All readings will be made available for you, but you might want to [buy a physical copy](https://www.penguinrandomhouse.com/books/563882/calling-bullshit-by-carl-t-bergstrom-and-jevin-d-west/).      
 
@@ -121,7 +121,7 @@ include_graphics("https://media.giphy.com/media/KZdaJU4SPaNzA3VPMF/giphy.gif")
 
 - Prep for 'class'. This class is flipped with asynchronous content delivery and synchronous meetings.  
 - Be sure to look over the assigned readings and/or videos, and complete the short low-stakes homework BEFORE each course.  
-- During class time, I will address questions make announcements, and get you started on in-class work. Anna & I will bounce around your breakout rooms to provide help and check-in. If you cannot make the class, you could do this on your own time without help, but we do not recommend this as a class strategy.
+- During class time, I will address questions make announcements, and get you started on in-class work. Husain & I will bounce around your breakout rooms to provide help and check-in. If you cannot make the class, you could do this on your own time without help, but we do not recommend this as a class strategy.
 - The help of your classmates and the environment they create is one of the best parts of this class. Help each other.  
 - In addition to low stakes work before and in class, there will be a few more intense assignments, some collaborative projects and a summative project as the term ends. There will be no 'high-stakes' in class timed tests.
 

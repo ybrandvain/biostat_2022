@@ -361,6 +361,15 @@ knitr::include_graphics('https://raw.githubusercontent.com/rstudio/cheatsheets/m
 ```
 
 
+### importing data cheat sheet
+
+There is no need to memorize anything, check out this [handy cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf)!
+
+```{r fig.cap='download the [importing data cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-import.png)', echo=FALSE}
+knitr::include_graphics('https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/tidyr.png')
+```
+
+
 
 
 
