@@ -341,7 +341,7 @@ knitr::include_app('https://brandvain.shinyapps.io/datainr/', height = '500px')
 ```
 
 
-## Functions covered  in *Handlign data in `R`* 
+## Functions covered  in *Handling data in `R`* 
 
 All require the tidyverse package
 
@@ -359,10 +359,10 @@ All require the tidyverse package
 
 ### dplyr cheat sheet
 
-There is no need to memorize anything, check out this [handy cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)!
+There is no need to memorize anything, check out this [handy cheat sheet](http://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)!
 
-```{r fig.cap='download the [dplyr cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)', echo=FALSE}
-knitr::include_graphics('https://d33wubrfki0l68.cloudfront.net/db69c3d03699d395475d2ac14d64f611054fa9a4/e98f3/wp-content/uploads/2018/08/data-transformation.png')
+```{r fig.cap='download the [dplyr cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)', echo=FALSE}
+knitr::include_graphics('http://d33wubrfki0l68.cloudfront.net/db69c3d03699d395475d2ac14d64f611054fa9a4/e98f3/wp-content/uploads/2018/08/data-transformation.png')
 ```
 
 
