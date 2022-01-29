@@ -43,7 +43,7 @@ There is no external reading for this chapter, and no complementary chapter in o
 
 ## Protecting and nurturing your data 
 
-We care about the data, the data are our guide through this world. It is therefore very important to ensure the integrity of our data. [Kate Laskowski](https://laskowskilab.faculty.ucdavis.edu/people/kate-laskowski/) learned this all too well, [when her collaborator messed with her data set](https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/). In required video below, she outlines the best practices to ensure the integrity of your data, both against unscrupulous collaborators, or, more likely, minor mistakes introduced in the process of data collection and analysis.
+We care about the data, the data are our guide through this world. It is therefore very important to ensure the integrity of our data. [Kate Laskowski](https://laskowskilab.faculty.ucdavis.edu/people/kate-laskowski/) learned this all too well, [when her collaborator messed with her data set](https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/). In the required video below, she outlines the best practices to ensure the integrity of your data, both against unscrupulous collaborators, or, more likely, minor mistakes introduced in the process of data collection and analysis.
 
 ```{r, echo = FALSE, fig.cap = '[Kate Laskowski](https://laskowskilab.faculty.ucdavis.edu/people/kate-laskowski/)  on data integrity (6 min and 06 seconds).', echo=FALSE, out.extra= 'allowfullscreen'}
 include_url("https://www.youtube.com/embed/G9LDtFMsUmY")
@@ -129,7 +129,7 @@ knitr::include_graphics('images/nondata.jpeg')
 You may be tempted to encode information with bolded text, highlighting, or text color. Don't do this! Be sure that all information is in a readable column. 
 
 
-`r ji(keyword = "thinking")` Why? `r ji(keyword = "thinking")` These  extra markings will either be lost or add an extra degree of difficultly to your analysis. Reserve such markings for the presentation of data. 
+`r ji(keyword = "thinking")` Why? `r ji(keyword = "thinking")` These  extra markings will either be lost or add an extra degree of difficulty to your analysis. Reserve such markings for the presentation of data. 
 
 #### No  values should  be  implied. 
 

@@ -37,7 +37,7 @@ There is no external reading for this chapter, but watch the required video embe
 
 
 ## What is `R` and why / how do we use it?
-`R` is a computer program, which is the go to language for most statisticians and data scientists (although some prefer python or Julia). R makes it possible to conduct complex statistical analyses, make nice figures, and write this book, all in one environment.
+`R` is a computer program, which is the go to language for most statisticians and data scientists (although some prefer [python](https://www.python.org/) or [julia](https://julialang.org/)). R makes it possible to conduct complex statistical analyses, make nice figures, and write this book, all in one environment.
 
 
 As opposed to GUI’s, like Excel, or click-based stats programs, R is focused around writing and sharing scripts. This allows analyses to be shared and replicated, ensures that data manipulation occurs in a script, preserving the integrity of the original data, and allows for tremendous flexibility.
@@ -117,7 +117,7 @@ Using RStudio Cloud allows you to use R and RStudio without installing anything 
 
 ####  Disadvantages to RStudio Cloud {-}  
 
-- **The biggest disadvantage of RStudio cloud is that it's expensive if we all use it and I only paid for a certain amount of usage, so please use it only if you're having issues using R on your computer.** Please e-mail   me f you would like to use it!   
+- **The biggest disadvantage of RStudio cloud is that it's expensive if we all use it and I only paid for a certain amount of usage, so please use it only if you're having issues using R on your computer.** Please e-mail   me if you would like to use it!   
 - Sometimes the system can get overwhelmed. This is pretty rare, but once a student was trying to use RStudioCloud during the international RStudio convention. The RStudio Cloud could not handle all the traffic and went down that day.    
 - You need an internet connection to use R. This can be a bummer if you don’t always have a reliable one.  
 - Some people (🖐) like having everything on their computer and struggle thinking about / working with folders on a cloud.    
@@ -128,7 +128,8 @@ Using RStudio Cloud allows you to use R and RStudio without installing anything 
 
 1. First **download/update R** from [here](https://www.r-project.org/), be sure to download the version compatible with your computer, and pick any CRAN mirror you like (I usually do Iowa). If you installed R a while ago, be sure you're using R version 4.0.0 or above.  
 
-2. Then **download/update RStudio** [from here](https://rstudio.com/products/rstudio/download/#download). Be sure to select he free version (RStudio Desktop, Open Source License), and as above, be sure to download the version compatible with your computer. If you installed RStudio a while ago, be sure you’re using RStudio version 1.3.0 or above.  
+2. Then **download/update RStudio** [from
+here](https://rstudio.com/products/rstudio/download/#download). Be sure to select the free version (RStudio Desktop, Open Source License), and as above, be sure to download the version compatible with your computer. If you installed RStudio a while ago, be sure you’re using RStudio version 1.3.0 or above.  
 
 ```{r, echo=FALSE}
 tweetrmd::include_tweet("https://twitter.com/joanneXaugust/status/1306695578370347013")   
@@ -195,8 +196,8 @@ We can also use R for asking logical questions. For example:
 - 'Is one greater than two?' like this `1 > 2`, which returns `FALSE`.   
 - 'Does four divided by four equal one?' like this `4/4 == 1` (note the two equals signs), which returns `TRUE`.    
 - 'Does four divided by four not equal one?' like this `4/4 != 1` (note an exclamation point, then an equals sign), which returns `FALSE`.    
-- 'Is four divided by four less than or equal to one?' like this `4/4 <= 1` (note an less than sign followed by the equals sign), which returns `TRUE`.  
-- 'Is four divided by four greater than or equal to one?' like this `4/4 >= 1` (note an greater then sign, then an equals sign), which returns `TRUE`.   
+- 'Is four divided by four less than or equal to one?' like this `4/4 <= 1` (note a less than sign followed by the equals sign), which returns `TRUE`.  
+- 'Is four divided by four greater than or equal to one?' like this `4/4 >= 1` (note a greater then sign, then an equals sign), which returns `TRUE`.   
 
 ###  Vectors in R 
 
@@ -358,7 +359,7 @@ library(tidyverse)
 
 ## Observations and suggestions for learning R / computer stuff   
 
-Teaching this class for years, I've learned a few things about leaning R that you should know.  
+Teaching this class for years, I've learned a few things about learning R that you should know.  
 
 ### Observations
 
