@@ -465,6 +465,28 @@ ggplot(msleep_data_ordervore, aes(x = log10_bodywt, y = log10_brainwt))+
 
 With two continuous variables, we want a graph that visually display the association between them. A scatterplot displays the explanatory variable n the x-axis, and the response variable on the y-axis. The scatterplot in figure \@ref(fig:scatter), shows a clear increase in brain size with body size across mammal species when both are on  $log_{10}$ scales.
 
+### lineplots  
+
+Sometime we want points connected by lines (i.e. a lineplot). Lineplots are most usefull when we are looking at trends over time (e.g. when the x-axis is time).  In such cases, [`geom_line()`](https://ggplot2.tidyverse.org/reference/geom_path) is here for us! Below I first modify the [`lynx`](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/lynx) dataset -- which describes the number of lynx trapped in Canada every year from 1821 to 1934 -- to make it a tibble (don't worry about this code).
+
+```{r}
+canadian_lynx <- tibble(year = start(lynx)[1]: end(lynx)[1],  lynx_trapped = c(lynx))
+glimpse(canadian_lynx)
+```
+
+We can now plot these data as a lineplot 
+
+```{r, fig.cap="A lineplot for the lynx dataset", fig.width=5, warning=FALSE, fig.height=2}
+ggplot(canadian_lynx, aes(x  = year, y = lynx_trapped))+
+  geom_line()
+```
+```{r, fig.cap="A scatterplot that should be a lineplot for the lynx dataset", fig.width=5, warning=FALSE, fig.height=2}
+ggplot(canadian_lynx, aes(x  = year, y = lynx_trapped))+
+  geom_point()
+```
+
+
+As you can see, the lineplot more clearly show the trends than does the scatterplot. 
 
 ### More dimensions
 

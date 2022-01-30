@@ -337,7 +337,7 @@ knitr::include_app('https://brandvain.shinyapps.io/intro2data/', height = '500px
 ```
 
 
-## Functions covered  in *Handlign data in `R`* 
+## Functions covered  in *Handling data in `R`* 
 
 All require the tidyverse package
 

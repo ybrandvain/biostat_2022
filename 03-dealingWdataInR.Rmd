@@ -50,9 +50,9 @@ This is a lot getting started, remember our goal here is exposure, not mastery. 
 ```{block2, type='rmdwarning'}
 There is no external reading for this chapter, but   
 
-- Watch the required videos from Stat 545 -- one about using [dplyr](https://www.youtube.com/watch?v=Gms3zSPqCk8) and about [tidying data](https://www.youtube.com/embed/qivE6exNsZI) embeded in the text (feel free to skip the videos featuring me),  and
-- Complete the `learnR` tutorials and quizes embeded in this chapter.        
-- And canvas assignment which goes over the quiz, readings, tutorials and videos. 
+- Watch the required videos from Stat 545 -- one about using [dplyr](https://www.youtube.com/watch?v=Gms3zSPqCk8) and about [tidying data](https://www.youtube.com/embed/qivE6exNsZI) embedded in the text (feel free to skip the videos featuring me),  and
+- Complete the `learnR` tutorials and quizes embedded in this chapter.        
+- And complete the canvas assignment which goes over the quiz, readings, tutorials, and videos. 
 ```
 
 
@@ -123,7 +123,7 @@ include_url("https://www.youtube.com/embed/Gms3zSPqCk8")
 
 
 ```{r fig.cap='', out.width='30%', echo=FALSE, out.extra='style="float:right; padding:10px"'}
-knitr::include_graphics('https://github.com/A/stats-illustrations/raw/master/rstats-artwork/dplyr_wrangling.png')
+knitr::include_graphics('https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_wrangling.png')
 ```
 
 Looking at the `toad.data` tibble above, we can get a sense of the utility of a tibble. We can see, not only the first few values of the data set, but also the class of each variable (`chr` for character, `fct` for factor, `dbl` for double -- a continuous class of data). 
