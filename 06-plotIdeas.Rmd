@@ -93,7 +93,7 @@ That said, I do introduce a few R tips when our desired effects can be achieved 
 
 ##  Why make a plot?     
 
-It’s nearly impossible to looking at all numbers in a data set, and come home with a holistic view of it. It is incredibly inefficient to communicate results in this way. In Chapter \@ref(summaRy) we introduced classic summary statistics that can more efficiently communicate data. However, on their own, these simple summaries can mislead, can miss important features in our data, and do not allow for readers to rapidly take in and evaluate our claims.     
+It’s nearly impossible to looking at all numbers in a data set, and come home with a holistic view of it. It is incredibly inefficient to communicate results in this way. In Chapter \@ref(summaRy) we will introduce classic summary statistics that can more efficiently communicate data. However, on their own, these simple summaries can mislead, can miss important features in our data, and do not allow for readers to rapidly take in and evaluate our claims.     
 
 ### Why make exploratory plots?
 

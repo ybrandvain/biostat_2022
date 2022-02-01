@@ -1,0 +1,136 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggforce)
+iris <- tibble(iris)
+library(learnr)
+library(datasauRus)
+library(tidyverse)
+library(ggmosaic)
+library(cowplot)
+iris <- tibble(iris)
+knitr::opts_chunk$set(echo = FALSE)
+library(ggthemes)
+data_13 <- datasaurus_dozen %>%
+  mutate(id = as.numeric(as.factor(dataset))) %>%
+  select(-dataset) %>%
+  mutate(id = letters[id])
+```
+
+# Review Data Summaries and Motivate Making Figures 
+
+
+### The data
+
+We are looking into `data_13` – a collection of dataset with three variables – `x`, `y`, and `id`, with thirteen different ids.
+
+First, take a `glimpse()` of the `data_13` 
+
+```{r glimpse, exercise=TRUE, eval = FALSE}
+____(___)
+```
+
+```{r glimpse-solution, eval = FALSE}
+glimpse(data_13)
+```
+
+### Summarize  
+
+I will preview the skills you wil learn in chapter 8 to have R calculate the mean and standard deviation for `x` and `y` by `id`. I am also giving you code to look into the correlation between these variables – a topic we’ll revisit in later chapters. For now, just click `run code`
+
+```{r summaryz, exercise=TRUE, eval = FALSE}
+data_13    %>%
+  group_by(id)   %>%
+  summarise(mean_x = mean(x),
+       sd_x   = sd(x),
+       mean_y = mean(y),
+       sd_y   = sd(y),
+       cor_xy = cor(x,y)) # a measure of the association between x and y
+```
+
+
+
+
+
+```{r message, echo=FALSE}
+question("What is the take home message from these summaries?",
+    answer("Across ids, summaries are similar for x, but different for y"),
+    answer("Across ids summaries are different for x, but similar for y"),
+        answer("All summaries are very similar across ids", correct = TRUE),
+        answer("All summaries are very different across ids"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+### Plot 
+
+#### Jitterplot
+
+Make a jittered plot of `data_13` by mapping `x` and `color` onto `id`, mapping `y` onto `y`, and specifying the appropriate geom for a jitterplot.
+
+Leave all lines but the first and the geom on the second as is – they use advanced ggplot skills that we will introduce in the next chapter.
+
+
+
+```{r jitterplot, exercise=TRUE, eval = FALSE}
+ggplot(data_13, aes(x = id, __ = __ , __ = ___ ))      +
+  geom____(width = .2, alpha = .5, show.legend = FALSE) +  # don't change these or worry about them, we'll revisit in the next chapter. 
+  stat_summary(fun.data  = "mean_se", color = "black")        # don't change these or worry about them, we'll revisit later
+```
+
+```{r jitterplot-solution}
+ggplot(data_13, aes(x = id, y = y ,color = id ))      +
+  geom_jitter(width = .2, alpha = .5, show.legend = FALSE) +  # don't change these or worry about them, we'll revisit in the next chapter. 
+  stat_summary(fun.data  = "mean_se", color = "black")        # don't change these or worry about them, we'll revisit later. 
+```
+
+
+```{r dinstinct, echo=FALSE}
+question("Look at the jitterplot you just made. Which id has the most distinct shape? (that is which one looks leastlike the others)",
+    answer("a"),
+    answer("d"),
+    answer("g", correct = TRUE),
+    answer("h"),
+    answer("i"),
+    allow_retry = TRUE,
+    incorrect = "Try again!")
+```
+
+
+#### Scatterplot
+
+
+Use the skills you learned when we first introduced ggplot to present a scatterplot of the data, sectioned off by `id`.
+
+
+```{r scatterplot, exercise=TRUE, eval = FALSE}
+ggplot(___, aes(x = __, y = __)) +
+  geom_point()                   + # leave blank
+  facet_wrap(~__)
+```
+
+```{r scatterplot-solution}
+ggplot(data_13, aes(x = x, y = y)) +
+  geom_point()                   + # leave blank
+  facet_wrap(~id)
+```
+
+
+```{r dino, echo=FALSE}
+question("Which plot shows a dinosaur??",
+    answer("a"),
+    answer("d", correct = TRUE),
+    answer("g"),
+    answer("h"),
+    answer("i"),
+    allow_retry = TRUE,
+    incorrect = "Try again!")
+```

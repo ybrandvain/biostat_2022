@@ -380,7 +380,7 @@ plot_grid(plot_a +  annotate(x = Inf, y = Inf, geom = "text", color = "red", lab
 
 #### Don't hide your data with a boxplot  {-}
 
-As we saw when encountering the [interquartile range](#iqr) in Chapter \@ref(summaRy) boxplots show the quartiles of the data, adding a potentially useful visual summary to a plot. **But, boxplots themselves are not a solution to overplotting** (Fig. \@ref(fig:howtobox)), and if [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html) is added after showing the data, the boxes will hide the data.
+As we will see when encountering the [interquartile range](#iqr) in Chapter \@ref(summaRy) boxplots show the quartiles of the data, adding a potentially useful visual summary to a plot. **But, boxplots themselves are not a solution to overplotting** (Fig. \@ref(fig:howtobox)), and if [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html) is added after showing the data, the boxes will hide the data.
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -673,7 +673,7 @@ Luckily, R makes adding distracting backgrounds/graphics, 3D, animation, glass s
 
 ###  Accessibility and Universal Design
 
-In chapter \@ref(goodfigs) we discussed the advantages of univrsal desig - so how do we achieve this in R?  
+In chapter \@ref(goodfigs) we discussed the advantages of universal design - so how do we achieve this in R?  
 
 #### Consider color vision deficiency 
 
