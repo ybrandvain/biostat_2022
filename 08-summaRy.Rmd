@@ -62,7 +62,7 @@ We usually call summaries from data *sample means*, *sample variance* etc. to re
 
 We'll rely on a few data sets to work through these concepts, one from our textbook, and two of which are built into `R`.   
 
-- `bindin` describes the proportion of sea urchin females of genotype AA or BB at the bindin locus fertilized by sperm from a male with an AA genotpe at the lysin gene. These two genes are known to interact to facillitate fertilization in sea urchin.       
+- `bindin` describes the proportion of sea urchin females of genotype AA or BB at the bindin locus fertilized by sperm from a male with an AA genotype at the lysin gene. These two genes are known to interact to facilitate fertilization in sea urchin.       
 
 - `rivers` gives the lengths (in miles) of 141 "major" rivers in North America, as compiled by the US Geological Survey.   
 
@@ -194,7 +194,7 @@ If you type the code above, R will say something like `summarise(…, .groups ="
 include_url("https://www.youtube.com/embed/bPFNxD3Yg6U")
 ```
 
-**Always look at the data before** interpreting or presenting a quantitative summary. A simple histogram is best for one variable, while scatterplots are a good starting place for two continuous variables.   
+**Always look at the data before** interpreting or presenting a quantitative summary. A simple histogram is best for one variable, while scatter plots are a good starting place for two continuous variables.   
 
 🤔WHY? 🤔 Because knowing the shape of our data is critical for making sense of any summaries.   
 
@@ -278,7 +278,7 @@ We notice two things about Figure \@ref(fig:medianmean2).
 1. There is an excess of small values and the mean is way smaller than the median, so this is left skewed.   
 2. It looks like there are two modes here -- one near 0.3, and one near 0.8.    
 
-We call data with two modes, as we see in \@ref(fig:medianmean2) **bimodal**. By contrast, the river length data (Fig. \@ref(fig:medianmean)) has only one mode, so it is **uniomodal**. If we had three modes, (i.e. three bumps in a histogram) it would be **trimodal** (Fig. \@ref(fig:modes1)).
+We call data with two modes, as we see in \@ref(fig:medianmean2) **bimodal**. By contrast, the river length data (Fig. \@ref(fig:medianmean)) has only one mode, so it is **unimodal**. If we had three modes, (i.e. three bumps in a histogram) it would be **trimodal** (Fig. \@ref(fig:modes1)).
 
 ```{r, modes1, fig.cap= 'Examples of unimodal, bimodal, and trimodal data.',echo=FALSE}
 include_graphics("images/modes-1.png")
@@ -336,7 +336,7 @@ ggplot(river.length , aes(x=1, y=river_length))+
   annotation_logticks(sides = "l",base = 10, size = .2)+ # put log ticks on bottom "b" and left )
   ggtitle("Boxplot of river lengths") +
   # this last bit is me having fun to add the labels for quantile
-  # you wont ned t do this, but I shared some fun tricks there
+  # you wont need t do this, but I shared some fun tricks there
   geom_text(data = .  %>% summarise(river_length=quantile(river_length,probs =seq(0,1,.25)),
                            quantile = c("min", "Q1","median","Q3","max"),),
             aes(x = 1.5, label = quantile),hjust = 0, size=2.5)
@@ -350,7 +350,7 @@ ggplot(river.length , aes(x=1, y=river_length))+
 
 #### Calculating the range and IQR in R.  
 
-Staying with the `rivers` data set, let's see how we can calculate these summaries in R. As I showed with the mean, I'll first worth through example codes that shows all the steps and helps use understand what we are calulating, before showing R shortcuts.
+Staying with the `rivers` data set, let's see how we can calculate these summaries in R. As I showed with the mean, I'll first worth through example codes that shows all the steps and helps use understand what we are calculating, before showing R shortcuts.
 
 To calculate the range, we need to know the minimum and maximum values, which we find with the [`min()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) and [`max()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html).
 
@@ -425,7 +425,7 @@ The **sample standard deviation*, which we call  $s$,  is simply the square root
 **The sample coefficient of variation standardizes the sample variance by the sample mean**. So the sample coefficient of variation equals the sample standard deviation divided by the sample mean, multiplied by 100, $CV = 100 \times \frac{s}{\overline{x}}$.  So for the example above the sample coefficient of variation equals $100 \times \frac{0.264}{0.41} = `r round(0.264/0.41,digits = 3)`\%$.  
 
 
-The variance often gets bigger as the mean increase. Take, for example, measurements of height for ten individuals calculate in pounds or stones. Because there are 14 pounds in a stone, the variance for the same measurements on the same individuals will be fourteen times bigger for measurements in pounds relative to stone. Dividing by the mean removes this effect. Because this standardization results in a unitless measure, we can then meaningfully ask questions like “What is more variable, human height or the rate or dolphin swim speed.”
+The variance often gets bigger as the mean increase. Take, for example, measurements of weight for ten individuals calculate in pounds or stones. Because there are 14 pounds in a stone, the variance for the same measurements on the same individuals will be fourteen times bigger for measurements in pounds relative to stone. Dividing by the mean removes this effect. Because this standardization results in a unitless measure, we can then meaningfully ask questions like “What is more variable, human weight or the rate or dolphin swim speed.”
 
 
 ```{block2, type='rmdnote'}
@@ -445,14 +445,14 @@ The variance often gets bigger as the mean increase. Take, for example, measurem
 We can calculate these summaries of variability with learning very little new R! Let’s work through this step by step:
 
 ```{r}
-# Step one, find the mean and the swqured deviation  
+# Step one, find the mean and the squared deviation  
 bindin.BB %>% 
   mutate(mean_percentfert       = mean(percentAAfertilization),
          squareddev_percentfert = (percentAAfertilization - mean_percentfert)^2)
 ```
 
 
-So, now the we have the squared deviations, we can calculate all of our summaries of interest. But there os a bit of new R to learn.    
+So, now the we have the squared deviations, we can calculate all of our summaries of interest. But there is a bit of new R to learn.    
 
 - I introduce the [`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) function to find the standard deviation square root of the variance.     
 - I introduce the [`unique()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html) function to go from our mean repeated values of the mean in above, to just one representation of the value in our coefficient of variation calculation.   
