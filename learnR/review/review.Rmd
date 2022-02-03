@@ -42,7 +42,7 @@ glimpse(data_13)
 
 ### Summarize  
 
-I will preview the skills you wil learn in chapter 8 to have R calculate the mean and standard deviation for `x` and `y` by `id`. I am also giving you code to look into the correlation between these variables – a topic we’ll revisit in later chapters. For now, just click `run code`
+I will preview the skills you will learn in chapter 8 to have R calculate the mean and standard deviation for `x` and `y` by `id`. I am also giving you code to look into the correlation between these variables – a topic we’ll revisit in later chapters. For now, just click `run code`
 
 ```{r summaryz, exercise=TRUE, eval = FALSE}
 data_13    %>%

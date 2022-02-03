@@ -33,7 +33,7 @@ These notes accompany portions of Chapter 2 — Displaying Data — of our textb
 
 
 ```{block2, type='rmdwarning'}
-There is no external reading for this chapter, but watch the embedded vidoes, and complete all embedded learnRexcercises. Then go to canvas to fill out the evaluation.  You will need to make three very different types of plots from the `mpg` data. 
+There is no external reading for this chapter, but watch the embedded vidoes, and complete all embedded learnR excercises. Then go to canvas to fill out the evaluation.  You will need to make three very different types of plots from the `mpg` data. 
 ```
 
 ##  A quick intro to data visualization.  
@@ -56,7 +56,7 @@ We generally think of two extremes of the goals of data visualization
 include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-blanks/ggplot2_blank.png")
 ```
 
-- In **explanatory visualizations** we aim to communicate our results to a broader audience. Here are goals are communication and persuasion. When developing explanatory plots we consider our audience (scientists? consumers? experts?) and how we are communicating (talk? website? paper?).
+- In **explanatory visualizations** we aim to communicate our results to a broader audience. Here our goals are communication and persuasion. When developing explanatory plots we consider our audience (scientists? consumers? experts?) and how we are communicating (talk? website? paper?).
 
 
 The `ggplot2` package in `R` is well suited for both purposes. **Today we focus on exploratory visualization in ggplot2 because**  
@@ -70,7 +70,7 @@ Later in the term we will show how we can use `ggplot2` to make high quality exp
 
 ### Centering plots on biology
 
-Whether developing an exploratory or exploratory plot, you should think hard about the biology you hope to convey before jumping into a plot. Ask yourself   
+Whether developing an explanatory or exploratory plot, you should think hard about the biology you hope to convey before jumping into a plot. Ask yourself   
 
 - What do you hope to learn from this plot?  
 - Which is the response variable (we usually place that on the y-axis)?  
@@ -160,7 +160,7 @@ include_app("https://brandvain.shinyapps.io/ggplotnodat/")
 **We make a more useful plot by adding a `geom` layer.**
 
 ```{block2, type='rmdnote'}
-**Adding things to a `ggplot`**. You see that we keep adding to our plots with a `+` sign. I often accidently use the pipe operator `%>%` sign used to pipe results from one procdure to the next in `dplyr` by mistake. R will gently notify you when you make this common error.   
+**Adding things to a `ggplot`**. You see that we keep adding to our plots with a `+` sign. I often accidently use the pipe operator `%>%` sign used to pipe results from one procedure to the next in `dplyr` by mistake. R will gently notify you when you make this common error.   
 ```
 
 
@@ -315,7 +315,7 @@ ggplot(msleep, aes(x = log10_brainwt))+
 ```
 
 
-In a **histogram**, *each value on the x represents some interval of values of our categorical variable* (in this case, we had 10 bins, but we could have, for example, looked at sleeep in one hour with `binwidth = 1`), while *y-values show how many observations correspond to an interval on the x*. 
+In a **histogram**, *each value on the x represents some interval of values of our categorical variable* (in this case, we had 10 bins, but we could have, for example, looked at sleep in one hour with `binwidth = 1`), while *y-values show how many observations correspond to an interval on the x*. 
 
 See this [excellent write up](https://tinlizzie.org/histograms/) if you want to learn more about histograms. 
 

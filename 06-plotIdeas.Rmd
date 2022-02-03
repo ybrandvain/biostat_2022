@@ -109,7 +109,7 @@ include_app("https://brandvain.shinyapps.io/review/")
 As we discuss in Chapter \@ref(intro), model building is a big part of what we do as biostatisticians. Thus it is important to explore the shape of our data BEFORE doing any statistical modeling, so that we can build appropriate models.   
 
 ### Why make explanatory plots?  
-Scientists build explanatory plots to effectively communicate their results, and convince provide skeptical readers the opportunity to evaluate their claims. Plots are such a critical mode of scientific communication that in many lab meetings, papers are discussed by lookng at the figures.  
+Scientists build explanatory plots to effectively communicate their results, and provide skeptical readers the opportunity to evaluate their claims. Plots are such a critical mode of scientific communication that in many lab meetings, papers are discussed by looking at the figures.  
 
 So, an effective plot should  
 
@@ -157,7 +157,7 @@ Graphs exist to make clear points. Together a set of plots should come together 
 1. What point do I want to make?  
 2. How does it fit in the larger story I trying to tell?   
 
-*Example of telling a story:* In basketball most shots are worth two points, while distant shots beyond the 'three point' line are worth three points. In around 2008-ish the NBA started to ge serous about nalytics, and a bunch of mathy people figured out that three points are more valuable than two points, so teams should shoot either three pointers, or very close two point shots, that have a really good chance of going in ([podcast for the curious](https://www.npr.org/2020/09/11/911898347/the-science-of-hoops)).  
+*Example of telling a story:* In basketball most shots are worth two points, while distant shots beyond the 'three point' line are worth three points. In around 2008-ish the NBA started to get serous about analytics, and a bunch of mathy people figured out that three points are more valuable than two points, so teams should shoot either three pointers, or very close two point shots, that have a really good chance of going in ([podcast for the curious](https://www.npr.org/2020/09/11/911898347/the-science-of-hoops)).  
 
 Figure \@ref(fig:nbathrees)A compares shot selection before and after this insight spread through the NBA. It makes the point that before the analytical revolution, different teams shot from very different places with no obvious trends, while after the revolution, all teams shot mainly three pointers and very close shots. \@ref(fig:nbathrees)B shows a greater context to these data point – highlighting the extreme rise in three point shot attempts from 2006 to the present, providing a longer historical record for background. Together, they tell the story of the NBA’s analytics revolution.
 
@@ -195,10 +195,10 @@ We tell stories to an audience, not a wall. And when we tell stories, we need to
 
 - What is their subject matter expertise? Do they have a background in science? In statistics?  
 - Are they familiar with interpreting the plots we're making or do they need guidance?  
-- What is our method of presentation -- that is, how is the experiencing our plots? Printed paper? A slide? A poster? The internet etc...?    
+- What is our method of presentation -- that is, how is the audience experiencing our plots? Printed paper? A slide? A poster? The internet etc...?    
 For most of this term your audience will be you, me, and sometimes a few peers. So you should make clear plots for people with some background in stats, who will be reading your plot on a computer.
 
-**As you read the guidence below, consider how would you change plots based on audience.**
+**As you read the guidance below, consider how would you change plots based on audience.**
 
 #### **Tailoring presentations to their method of presentation**   {- #presentation}
 
@@ -231,7 +231,7 @@ All bad plots are bad in their own way, but all good plots are the same. All goo
 - Clear  
 - Accessible  
 
-We will focus on the distribution of student to ratio ratios across continents (first introduced in Figs \@ref(fig:evo)), as an example, but will introduce other data sets when necessary.   
+We will focus on the distribution of student to teacher ratios across continents (first introduced in Figs \@ref(fig:evo)), as an example, but will introduce other data sets when necessary.   
 
 Let us start with two versions of this plot so bad, they are hard to make in R.  
 
@@ -275,7 +275,7 @@ include_url("https://www.youtube.com/embed/9pNWVMxaFuM")
 
 ##### **Misleading x-axes** {-}     
 
-Figure \@ref(fig:georgia) shows a graph, released by the sate of Georgia in May 2020, to show that they were controlling coronavirus. Can you spot what is misleading here?
+Figure \@ref(fig:georgia) shows a graph, released by the state of Georgia in May 2020, to show that they were controlling coronavirus. Can you spot what is misleading here?
 
 ```{r georgia, fig.cap = '*HINT:* look at the x-axis', out.width='80%', echo=FALSE}
 include_graphics("images/georgia.jpeg")
@@ -319,7 +319,7 @@ include_graphics("images/binsize2-1.png")
 
 So, what should you do? I recommend experimenting with a few different bin sizes (by either specifying they number or width with the `bins` or `binwidth` arguments to the [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) function, respectively).
 
-If you are not satisfied with any binwidth, you can show the cumulative frequency distribution (e.g. Figure \@ref(fig:binsize)D with the [`stat_ecdf()`](https://ggplot2.tidyverse.org/reference/stat_ecdf.html) function)). Here we make no decision about binsize – rather they y-axis shows thee proportion of the data with a value less than x. The bimodality is revealed by the two distinct steep slopes of this plot. While this shows all the data the downside is that they are harder for inexperienced readers to interpret.
+If you are not satisfied with any binwidth, you can show the cumulative frequency distribution (e.g. Figure \@ref(fig:binsize)D with the [`stat_ecdf()`](https://ggplot2.tidyverse.org/reference/stat_ecdf.html) function)). Here we make no decision about binsize – rather the y-axis shows the proportion of the data with a value less than x. The bimodality is revealed by the two distinct steep slopes of this plot. While this shows all the data the downside is that they are harder for inexperienced readers to interpret.
 
 Finally I note that all of the concerns about bin size carry over to any use of smoothing as you might use in a density plot. In ggplot you can control the smoothing of density plot by using the `adjust` argument in the [`geom_density()`](https://ggplot2.tidyverse.org/reference/geom_density.html) function.   
 
@@ -355,8 +355,8 @@ Barplots are not uniformly bad. While we should not report means in a barplot, b
 
 The most transparent data are cully reproducible – that is people should be able to download your code and your data, and redo your analysis, and understand the data well enough to run a different analysis on it. This is becoming the standard for scientific papers, and I will revisit these ideas throughout the term, but this is more relevant to Honors and Grad students than the rest of the class. Check out [this paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285) by @sandve2013 for an introduction to reproducible research.    
 
-#### Avoid overplotting  {#nooverplotting}  
-Sometimes showing all your data actually hides patterns. Figure 9.15a demonstrates this issue, and Figures \@ref(fig:overplotting)offer some ways to overcome overplotting.  
+#### Avoid overplotting  {#nooverplotting}   
+Sometimes showing all your data actually hides patterns. Figure 9.15a demonstrates this issue, and Figures \@ref(fig:overplotting) offer some ways to overcome overplotting.  
 
 
 ```{r overplotting, fig.cap='Sometimes showing all the data hides patterns. **(a)** By plotting data points on top of each other, **a** hides the distribution of values. **(b--i)** display plots to solve the this *overplotting* issue. The *sina plot* **(f)** is one of my favorites because it shows the shape of the data and each data point. After installing and loading the [ggforce package](https://ggforce.data-imaginist.com/index.html), use [`geom_sina()`](https://ggforce.data-imaginist.com/reference/geom_sina.html) to make a sina plot. Data from @beall2006. Download data [here](https://whitlockschluter3e.zoology.ubc.ca/Data/chapter02/chap02e3bHumanHemoglobinElevation.csv).',echo=FALSE}
@@ -369,7 +369,7 @@ Good plots are clear with messages that pop out at you. To make a clear plot, mi
 
 - **Minimize cognitive burden.** Two of my favorite books are Crime and Punishment, and 100 Years of Solitude. These are great stories. But I hated that I needed to bring a piece of paper to trace the relationships between each character in 100 years of solitude, or remember that Raskolnikov, Rodya, and were all the same person. While I’m not here to critique Márquez or Dostoyevsky, that won’t fly in a scientific figure. Be consistent, and use any tricks you can to minimize how much a reader must keep in their head at once.   
   
-- **Make points obvious.** While scientific figure should tell a sorry, they should not be a mystery novel or *Fight Club* -- that is, the story should be obvious throughout, and the reader should get the story without needing to solve a puzzle.
+- **Make points obvious.** While scientific figure should tell a story, they should not be a mystery novel or *Fight Club* -- that is, the story should be obvious throughout, and the reader should get the story without needing to solve a puzzle.
 
 - **Avoid distractions.** Readers should be thinking about your story, not the special effects or CGI.
 
@@ -381,7 +381,7 @@ Let's consider how we can us these concepts to build clear plots.
 We should build our plots in such a way as to help readers focus on the important results.
 
 ##### **Bring out important comparisons** {-}   
-Simply putting data in a readable formal in a plot is not enough. Good plots are designed to help readers see and evaluate the patterns critical to our story. Consider the story telling analogy - depending on the point of your story, highlighting a detail could either be a red-herring or a critical element. When making figures, we should not hide or lie about certain features of our data, but we should draw attention to what we believe is important. Practically, this means that, for one data set, very different plots could be appropriate depending on the point we are making (see Fig. \@ref(fig:modernaplots)).     
+Simply putting data in a readable format in a plot is not enough. Good plots are designed to help readers see and evaluate the patterns critical to our story. Consider the story telling analogy - depending on the point of your story, highlighting a detail could either be a red-herring or a critical element. When making figures, we should not hide or lie about certain features of our data, but we should draw attention to what we believe is important. Practically, this means that, for one data set, very different plots could be appropriate depending on the point we are making (see Fig. \@ref(fig:modernaplots)).     
 
 
 
