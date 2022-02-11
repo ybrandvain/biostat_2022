@@ -1,0 +1,199 @@
+---
+title: "Uncertainty Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggforce)
+iris <- tibble(iris)
+library(learnr)
+library(datasauRus)
+library(tidyverse)
+library(ggmosaic)
+library(cowplot)
+iris <- tibble(iris)
+knitr::opts_chunk$set(echo = FALSE)
+library(ggthemes)
+```
+
+## Review concepts 
+
+
+```{r sampdist, echo=FALSE}
+question("The ___ is the key idea we use to think about uncertainty due to sampling error.",
+    answer("Standard error"),
+    answer("Bootstrap distribution"),
+    answer("Sampling distribution", correct = TRUE),
+    answer("Error function"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+```{r boot, echo=FALSE}
+question("For real data, we can use the __, which we make by sampling __ replacement to estimate with uncertainty.",
+    answer("Bootstrap distribution, with", correct = TRUE),
+    answer("Bootstrap distribution, without"),
+    answer("Sampling distribution, without"),
+    answer("Sampling distribution, with"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+```{r smaller, echo=FALSE}
+question("Consider the webapp above. Which of these estimates got bigger as sample sizes got smaller? (check all that apply).",
+    answer("Standard error", correct = TRUE),
+    answer("Standard deviation"),
+    answer("Mean"),
+    answer("Confidence interval", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+```{r ci, echo=FALSE}
+question("You calculated a 95% confidence interval from a random sample. What is the probability that the canfidence interval captured the truw population parameter? (check all that apply).",
+    answer("There is no probability about this, it either did or it did not", correct = TRUE),
+    answer("95%"),
+    answer("It depends on the sample size"),
+    answer("It depends on the sample standard deviation"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+
+```{r truf, echo=FALSE}
+question("You actually know the population parameter. A bunch of friends sample randomly from this population, and calcualte 95% confidence intervals. What proportion of these confidence intervals will catch the true parameter? (check all that apply).",
+    answer("There is no probability about this, it either did or it did not"),
+    answer("95%", correct = TRUE),
+    answer("It depends on the sample size"),
+    answer("It depends on the sample standard deviation"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+### The `faithful` data  
+
+First, know that there are a bunch of ways to bootstrap in R and this is the one we’re going with.
+
+OK, so old faithful is meant to erupt pretty regularly, how regularly is this? Lets look into it by estimating our uncertainty in the mean waiting time in the faithful data set in R.
+
+First, let’s take a `glimpse` of the `faithful` data.
+
+
+```{r glimpse, exercise=TRUE, eval = FALSE}
+____(___)
+```
+
+```{r glimpse-solution, eval = FALSE}
+glimpse(faithful)
+```
+
+We see two columns:   
+- `eruptions` is how long an eruption lasts.      
+- `waiting` is the time until the next eruption.     
+
+
+#### Visualize and describe
+
+Now lets make a historgram of the waiting time between eruptions.
+
+
+
+```{r hist, exercise=TRUE, eval = FALSE}
+ggplot(, aes(___)) +
+  ____(bins = 40, color = "white")+
+  labs(title = "Histogram of waiting time between eruptions.")
+```
+
+
+
+```{r histdescribe, echo=FALSE}
+question("The distribution of waiting times between Old Faithful's erruptions is ___ (check the best answer)",
+    answer("Unimodal",),
+    answer("Bimodal" , correct = TRUE),
+    answer("Symmetric"),
+    answer("Right Skewed"),  
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+So let’s calculate the mean and standard deviation of the time between eruptions in this sample, with the summarise(), mean(), and sd() functions.
+
+
+
+```{r sd, exercise=TRUE, eval = FALSE}
+faithful %>%
+  summarise(mean = __(__),   standard_dev  = __(__))
+```
+
+```{r sd-solution,  eval = FALSE}
+faithful %>%
+  summarise(mean = mean(waiting), standard_dev  = sd(waiting))
+```
+
+
+### Lets boostrap!
+
+So, now let’s build a bootstrapped distribution to estimate our uncertainty in this estimate, visualize this as a histogram, and find the bootstrap SE and the upper and lower 95% confidence interval (NOTE: Unlke in the text, here we’ll run the [`quantile()`]() function twice – once for the lower limit and once for the upper limit, for formatting reasons).
+
+```{r doboot, exercise=TRUE, eval = FALSE, message=FALSE, warning=FALSE}
+boot_faithful   <- replicate(n  = 1000, simplify = ___, 
+  expr = faithful %>%
+    slice_sample(prop = ___, replace = __) %>%
+    summarise(waiting_mean = __(___))) %>%
+  bind_rows()
+
+
+ggplot(___, aes(x = ___)) +
+  ___(bins = 20, color = "white")+
+  labs(title = "Histogram of waiting time between eruptions.")
+
+boot_faithful %>%
+  summarise(boot_se        = ___(___),
+            boot_lower_95CI = quantile(__, probs = 0.025),
+            boot_upper_95CI = quantile(__, probs = ___))
+```
+
+```{r doboot-solution,  eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+boot_faithful   <- replicate(n  = 1000, simplify = ___, 
+  expr = faithful %>%
+    slice_sample(prop = 1, replace = TRUE) %>%
+    summarise(waiting_mean =mean(waiting))) %>%
+  bind_rows()
+
+ggplot(boot_faithful, aes(x = waiting_mean)) +
+  geom_histogram(bins = 20, color = "white")+
+  labs(title = "Histogram of waiting time between eruptions.")
+
+boot_faithful %>%
+  summarise(boot_se        = sd(waiting_mean),
+            boot_lower_95CI = quantile(waiting_mean, probs = 0.025),
+            boot_upper_95CI = quantile(waiting_mean, probs = 0.975))
+
+```
+
+

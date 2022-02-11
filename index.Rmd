@@ -71,7 +71,7 @@ My motivating goal for this course is to empower you to produce, present, and cr
 ### `R`, `RStudio`, and the `tidyverse` {-}
 
 ```{r, fig.cap = 'This image comes with permissions from Allison Horst, who makes tremendous aRt. If you appreciate her work, she would appreciate your support for [Data for Black Lives](https://d4bl.org/)', echo=FALSE}
-include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/monster_support.jpg")
+include_graphics("images/monster_support.jpeg")
 ```
 
 

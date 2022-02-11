@@ -1,0 +1,436 @@
+---
+title: "Sampling Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggforce)
+iris <- tibble(iris)
+library(learnr)
+library(datasauRus)
+library(tidyverse)
+library(ggmosaic)
+library(cowplot)
+iris <- tibble(iris)
+knitr::opts_chunk$set(echo = FALSE)
+library(ggthemes)
+link  <-  "https://whitlockschluter3e.zoology.ubc.ca/Data/chapter04/chap04e1HumanGeneLengthsLongestTranscript.csv"
+gene_lengths <- read.csv(link) %>% as_tibble()
+median_gene_length <- gene_lengths %>%
+  summarise(median_length = median(size)) %>% 
+  pull()
+```
+
+## Review concepts 
+
+
+```{r SESD1, echo=FALSE}
+question("
+The ___ describes the variability among individual observations in a sample (or population). In other words, the ____ quantifies how far we expect individuals to deviate from the sample estimate.",
+    answer("Standard error"),
+        answer("Standard deviation", correct = TRUE),
+        answer("Error function"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+```{r SESD2, echo=FALSE}
+question("
+The ___ describes the variability among estimates (of a fixed size) from a population. In other words, the ____ quantifies how far we expect sample estimates to deviate from the population parameter.",
+    answer("Standard error", correct = TRUE),
+        answer("Standard deviation"),
+        answer("Error function"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+### Human gene lengths
+
+Whitlock and Schluter present a dataset containing the name, description and size (in basepairs) of every gene in the human genome. The code below assigns it to a tibble called gene_lengths. Feel free to work on this here, or to [download the data](https://whitlockschluter3e.zoology.ubc.ca/Data/chapter04/chap04e1HumanGeneLengthsLongestTranscript.csv) and run it on your own computer.   
+
+```{r, message=FALSE, warning=FALSE}
+link  <-  "https://whitlockschluter3e.zoology.ubc.ca/Data/chapter04/chap04e1HumanGeneLengthsLongestTranscript.csv"
+gene_lengths <- read_csv(link) 
+```
+
+
+#### Population or sample?
+
+
+```{r popORsamp, echo=FALSE}
+question("`Gene_lengths` corresponds to ____ of human genes.",
+    answer("the population", correct = TRUE),
+        answer("a sample"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+#### `glimpse()`
+
+First, take a `glimpse()` at the gene_lengths dataset
+
+```{r glimpse, exercise=TRUE, eval = FALSE}
+____(___)
+```
+
+```{r glimpse-solution, eval = FALSE}
+glimpse(gene_lengths)
+```
+
+#### Visualize and describe
+
+
+Make a histogram of this dataset
+
+
+```{r hist, exercise=TRUE, eval = FALSE}
+ggplot(___, aes(x =  ___))   +
+  ____(binwidth = 500)    # add the geom for a histogram here
+```
+
+```{r histdescribe, echo=FALSE}
+question("The distribution of human gene lengths is ___ (check all that apply)",
+    answer("Unimodal", correct = TRUE),
+    answer("Bimodal"),
+    answer("Symmetric"),
+    answer("Right Skewed", correct = TRUE),  
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+```{r histwhat, echo=FALSE}
+question("The plot above displays ___",
+    answer("the sampling distribution"),
+    answer("the population distribution", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+```{r sdwhat, echo=FALSE}
+question("The standard deviation of size in the gene_lengths data is the",
+    answer("the sampling distribution"),
+    answer("the population distribution", correct = TRUE),
+    answer("Standard Error (aka the standard deviation of the sampling distribution)."),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+Use the `sd()` function to calculate the standard deviation of the plot above.
+
+
+```{r sd, exercise=TRUE, eval = FALSE}
+gene_lengths %>%
+  summarise(standard_dev  = __(__))
+```
+
+```{r sd-solution,  eval = FALSE}
+gene_lengths %>%
+  summarise(standard_dev  = sd(size))
+```
+
+
+
+**NOTE** This is just a bit off… Because this is a population, not a sample, the population standard deviation is $\sigma = \sqrt{\frac{\Sigma (x_i - \overline{x})^2}{n}}$, rather than the sample standard deviation, $s= \sqrt{\frac{\Sigma (x_i - \overline{x})^2}{n-1}}$. But because n is so large, these answers are nearly identical.
+
+### Sampling   
+
+I tried to create a sampling distribution for median human gene length by randomly selecting nucleotides from the human exome, finding the gene they were in, noting its length, and removing it from my list until I had the lengths of 50 genes in the human genome. I did this two-hundred times to get two hundred samples of size fifty.
+
+```{r, echo=FALSE, fig.width=6, fig.height=2,  message=FALSE, warning=FALSE}
+tibble(x = replicate(250,median(sample(gene_lengths$size, prob = gene_lengths$size, size = 50)))) %>%
+     ggplot(aes(x=x))+
+     geom_histogram(color = "white") +
+     geom_vline(xintercept = median(gene_lengths$size), color = "red", lty = 2)+
+     scale_x_continuous(limits = c(2000,7.5e3), trans = "log10",expand = c(0,0))+
+     annotation_logticks(sides = "b")+
+     labs(x = "meadian gene length (from each sample of size 50)")+
+     annotate(x = 2800, y = 30, label = "Population median", geom = "label",color ="red")
+```
+
+
+
+```{r whathappened, echo=FALSE}
+question("The difference between the true population median (red line) and my estimates from samples of size fifty (bars in histogram) are most likely explained by",
+    answer("Sampling bias", correct = TRUE),
+    answer("Non-independence"),
+    answer("Sampling Error"),
+    answer("The fact that the median is non-parametric and therfore unstable."),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+**Explain your reasoning, and describe what about the sampling procedure could cause this difference between parameter and estimate.**
+
+
+Use the `slice_sample()` function to generate a random sample of five genes from `gene_lengths`, and assign it to `one_sample`. Then print it out, and finally use the `summarise()` function to calculate the median gene length in this sample.
+
+
+```{r onesamp, exercise=TRUE, eval = FALSE}
+one_sample <- gene_lengths %>%
+  slice_sample(n = ___, replace = FALSE)
+
+print(one_sample)
+
+one_sample %>%
+  summarize(sample_median = ___(___))
+```
+
+```{r onesamp-solution,  eval = FALSE}
+one_sample <- gene_lengths %>%
+  slice_sample(n =5, replace = FALSE)
+
+print(one_sample)
+
+one_sample %>%
+  summarize(sample_median = median(size))
+```
+
+#### Small vs large samples
+
+**Small sample** 
+
+Combine `slice_sample()` with `replicate()`  to take one thousand samples of size five, calculate the median gene length for each sample and print out the output. Finally, plot a histogram of the sampling distribution, add a red vertical line at the true  population median (which should be here as `median_gene_length`) to compare your sample estimates to the true population parameter. 
+
+
+```{r smallsamp, exercise=TRUE, eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+sampdist_n5 <- replicate(n = 1000, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = ___, replace = ___)  %>%
+            summarise(sample_median  ___(___))) %>%
+  bind____()
+  
+print(___)
+
+ggplot(____, aes(x = ____)) +
+  geom_____(binwidth = 250, color = "white")                  +
+  labs(title = "Sampling distribution of human gene lengths", subtitle = "Sample size of five",x = "Median gene length")+
+  scale_x_continuous(limits = c(0, 20000)) +   
+  geom_vline(xintercept = median_gene_length, color = "red", lty = 2)+
+  annotate(label = "Population median", x = median_gene_length, y = 95, color = "red", geom = "text", hjust = 0)
+```
+
+```{r smallsamp-solution,  eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+sampdist_n5 <- replicate(n = 1000, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = 5, replace = FALSE)  %>%
+            summarise(sample_median =median(size))) %>%
+  bind_rows()
+  
+print(sampdist_n5)
+
+ggplot(sampdist_n5, aes(x = sample_median)) +
+  geom_histogram(binwidth = 250, color = "white")                  +
+  labs(title = "Sampling distribution of human gene lengths", subtitle = "Sample size of five",x = "Median gene length")+
+  scale_x_continuous(limits = c(0, 20000)) +   
+  geom_vline(xintercept = median_gene_length, color = "red", lty = 2)+
+  annotate(label = "Population median", x = median_gene_length, y = 95, color = "red", geom = "text", hjust = 0)
+```
+
+
+```{r eyballsmall1, echo=FALSE}
+question("Eyeballing your figure above, approximately what percent of samples have a median greater than the population median?",
+    answer("Less than one percent"),
+    answer("Roughly five percent"),
+    answer("Roughly twenty five percent"),
+    answer("Roughly fifty percent", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+```{r eyballsmal2, echo=FALSE}
+question("Eyeballing your figure above, approximately what percent of samples have a median greater than the five thousand base pairs?",
+    answer("Less than one percent"),
+    answer("Roughly five percent", correct = TRUE),
+    answer("Roughly twenty five percent"),
+    answer("Roughly fifty percent"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+**Large sample** 
+
+Combine `slice_sample()` with `replicate()` to take five hundred samples of size fifty, calculate the median gene length for each sample and print out the output. Finally, plot a histogram of the sampling distribution, add a red vertical line at the true  population median  to compare your sample estimates to the true population parameter. 
+
+
+```{r bigsamp, exercise=TRUE, eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+sampdist_n500 <- replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = ___, replace = ___)  %>%
+            summarise(sample_median  ___(___))) %>%
+  bind____()
+  
+print(___)
+
+ggplot(____, aes(x = ____)) +
+  geom_____(binwidth = 250, color = "white")                  +
+  labs(title = "Sampling distribution of human gene lengths", subtitle = "Sample size of five",x = "Median gene length")+
+  scale_x_continuous(limits = c(0, 20000)) +   
+  geom_vline(xintercept = median_gene_length, color = "red", lty = 2)+
+  annotate(label = "Population median", x = median_gene_length, y = 125, color = "red", geom = "text", hjust = 0)
+```
+
+```{r bigsamp-solution,  eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+sampdist_n50 <- replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = 50, replace = FALSE)  %>%
+            summarise(sample_median =median(size))) %>%
+  bind_rows()
+  
+print(sampdist_n50)
+
+ggplot(sampdist_n50, aes(x = sample_median)) +
+  geom_histogram(binwidth = 250, color = "white")                  +
+  labs(title = "Sampling distribution of human gene lengths", subtitle = "Sample size of fifty",x = "Median gene length")+
+  scale_x_continuous(limits = c(0, 20000)) +   
+  geom_vline(xintercept = median_gene_length, color = "red", lty = 2)+
+  annotate(label = "Population median", x = median_gene_length, y = 125, color = "red", geom = "text", hjust = 0)
+```
+
+
+```{r eyballbig1, echo=FALSE}
+question("Eyeballing your figure above, approximately what percent of samples have a median greater than the population median?",
+    answer("Less than one percent"),
+    answer("Roughly five percent"),
+    answer("Roughly twenty five percent"),
+    answer("Roughly fifty percent", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+```{r eyballbig2, echo=FALSE}
+question("Eyeballing your figure above, approximately what percent of samples have a median greater than the five thousand base pairs?",
+    answer("Less than one percent", correct = TRUE),
+    answer("Roughly five percent"),
+    answer("Roughly twenty five percent"),
+    answer("Roughly fifty percent"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+```{r whatsthediff, echo=FALSE}
+question("What aspect of sampling is responsible for the difference between the plots above?",
+    answer("Sampling bias",),
+    answer("Non-independence"),
+    answer("Sampling error", correct = TRUE),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+### Standard error
+
+Use the sampling distribution with five hundred samples of size five (saved as samplingdist_five) to estimate the stadard error in the estimate of median (column sample_median) human gene length from a sample of five genes.
+
+
+```{r smallsampse, exercise=TRUE, eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = ___, replace = ___)  %>%
+            summarise(sample_median  = median(size))) %>%
+  bind____() %>%
+  ___(se = ___(___) ) 
+```
+
+```{r smallsampse-solution, eval = FALSE}
+# this code may take a minute to run, be patient
+replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = 5, replace = TRUE)  %>%
+            summarise(sample_median  = median(size))) %>%
+  bind_rows() %>%
+  summarise(se = sd(sample_median) )
+```
+
+
+
+
+```{r sesmall, echo=FALSE}
+question("The standard error calculated above is about",
+    answer("Fifty"),
+    answer("Four hundred"),
+    answer("One thousand", correct = TRUE),
+    answer("Ten thousand"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+
+
+```{r bigsampse, exercise=TRUE, eval = FALSE, message=FALSE, warning=FALSE}
+# this code may take a minute to run, be patient
+replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = ___, replace = ___)  %>%
+            summarise(sample_median  = median(size))) %>%
+  bind____() %>%
+  ___(se = ___(___) ) 
+```
+
+```{r bigsampse-solution, eval = FALSE}
+# this code may take a minute to run, be patient
+replicate(n = 500, simplify = FALSE,
+        expr = gene_lengths   %>% 
+            slice_sample(n = 50, replace = TRUE)  %>%
+            summarise(sample_median  = median(size))) %>%
+  bind_rows() %>%
+  summarise(se = sd(sample_median) )
+```
+
+
+
+
+```{r sebig, echo=FALSE}
+question("The standard error calculated above is about",
+    answer("Fifty"),
+    answer("Four hundred", correct = TRUE),
+    answer("One thousand"),
+    answer("Ten thousand"),
+    allow_retry = TRUE,
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
