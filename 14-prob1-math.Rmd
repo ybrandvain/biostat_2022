@@ -38,7 +38,7 @@ These notes accompany portions of Chapter 5  --- *Probability* --- of our textbo
 ```
 
 
-<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">  We want to understand how seemingly important patterns can arise by chance, how to think about chance events, how to think quantiativelt about chance events, and gain an appreciation for a foundational concern of statistics and how the filed addresses this concern. </span> 
+<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">  We want to understand how seemingly important patterns can arise by chance, how to think about chance events, how to think quantiatively about chance events, and gain an appreciation for a foundational concern of statistics and how the filed addresses this concern. </span> 
  
 **Learning goals: By the end of this chapter you should be able to**   
 
@@ -75,7 +75,7 @@ include_graphics("https://imgs.xkcd.com/comics/sports.png")
 
 
 
-2. **We don't want to tell biological stories about coincidences.** A key lesson from probability theory is that some outcome will happen. So, for every coincidence in the podcast above, there are tens of thousands of cases where something uninteresting happened. For example, no one called This American Life to tell them that somehow their grandmother was not in a random picture their friend sent them (*No coincidence, no story*).  Similarly, we don't want to tell everyone that covid restore lactose tolerance just because someone in our extended social network lost his lactose intolerance after recovering from covid. Much of statistics is simply a mathematical contraption, built of probability theory, to help us judge if our observations are significant or if they are a mere coincidence.   
+2. **We don't want to tell biological stories about coincidences.** A key lesson from probability theory is that some outcome will happen. So, for every coincidence in the podcast above, there are tens of thousands of cases where something uninteresting happened. For example, no one called This American Life to tell them that somehow their grandmother was not in a random picture their friend sent them (*No coincidence, no story*).  Similarly, we don't want to tell everyone that covid restores lactose tolerance just because someone in our extended social network lost his lactose intolerance after recovering from covid. Much of statistics is simply a mathematical contraption, built of probability theory, to help us judge if our observations are significant or if they are a mere coincidence.   
 
 
 
@@ -83,7 +83,7 @@ include_graphics("https://imgs.xkcd.com/comics/sports.png")
 
 Luckily, none of his requires serious expertise in probability theory -- while I recommend taking a bunch of probability theory courses (because it's soooo fun), a quick primer, like we're working through here is quite powerful!   
 
-**Perhaps the most important take home message from all of this is that random goes not mean equal probability, and does not mean we have no clue. In fact, we can often make very good predictions about the world by considering how probability works. **   
+**Perhaps the most important take home message from all of this is that random does not mean equal probability, and does not mean we have no clue. In fact, we can often make very good predictions about the world by considering how probability works. **   
 
 
 ## Probability Concepts  
