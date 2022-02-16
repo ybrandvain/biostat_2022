@@ -50,11 +50,11 @@ Today we focus mainly on the spread and location of the data, but regularly brin
 
 ```{block2, type='rmdnote'}
 
-Whenever weare summarizing data, we are making an estimate from a sample, and do not have a parameter from a population.
+Whenever we  summarize data, we are making an estimate from a sample, and do not have a parameter from a population.
 
 In stats we use Greek letters to describe parameter values, and the English alphabet to show estimates from our sample.
 
-We usually call summaries from data *sample means*, *sample variance* etc. to remind everyone that these are estimates, not parameters. For some   calculations (e.g. the variance) the equations to calculate the parameter from a population differ slightly from equations to calculate the parameter from a population, because otherwise estimates would be biased.
+We usually call summaries from data *sample means*, *sample variance* etc. to remind everyone that these are estimates, not parameters. For some   calculations (e.g. the variance) the equations to calculate the parameter from a population differ slightly from equations to estimate it from a sample, because otherwise estimates would be biased.
 ```
 
 
@@ -154,7 +154,7 @@ Note, we can choose any name we want for these summarized columns - just make su
 #### Quiz: Getting summaries in R {-}   
 
 ```{r, echo=FALSE}
-include_app("https://brandvain.shinyapps.io/one_group/")
+include_app("https://brandvain.shinyapps.io/one_group/") # fix this
 ```
 
 
@@ -217,7 +217,7 @@ ggplot(river.length , aes(x=river_length))+
   geom_histogram(bins = 30, color = "white") # for now ignore code for added elaborations (labeling mean and median)
 ```
 
-```{r medianmean, echo=FALSE, fig.height=1.7, fig.width=4, fig.cap= 'Histogram of river length dataset. The  median is the <span style="color:red">dashed red line</span>, and the median is shown by the <span style="color:blue">solid blue line</span>.'}
+```{r medianmean, echo=FALSE, fig.height=1.7, fig.width=4, fig.cap= 'Histogram of river length dataset. The  median is the <span style="color:red">dashed red line</span>, and the mean is shown by the <span style="color:blue">solid blue line</span>.'}
 river.length <- tibble(river_length = rivers) 
 
 ggplot(river.length , aes(x=river_length))+
@@ -233,7 +233,7 @@ We notice two related things about Figure \@ref(fig:medianmean):
 1. There are a numerous extremely large values.   
 2. The median is substantially less than the mean.    
 
-We call data like that in Figure \@ref(fig:medianmean) **Right skewed**, while data with an excess of extremely small values, and with a median substantially greater than the mean are Left **skewed**.    
+We call data like that in Figure \@ref(fig:medianmean) **Right skewed**, while data with an excess of extremely small values, and with a median substantially greater than the mean are **Left skewed**.    
 
 In Figure \@ref(fig:skew1), we show example density plots of left-skewed, unskewed, and right-skewed data.
 
@@ -262,7 +262,7 @@ ggplot(bindin , aes(x = percentAAfertilization))+
 
 
 
-```{r medianmean2, echo=FALSE, fig.height=1.7, fig.width=3, fig.cap= 'Histogram of bindin  dataset. The  median is the <span style="color:red">dashed red line</span>, and the median is shown by the <span style="color:blue">solid blue line</span>.'}
+```{r medianmean2, echo=FALSE, fig.height=1.7, fig.width=3, fig.cap= 'Histogram of `bindin`  dataset. The  mean is the <span style="color:red">dashed red line</span>, and the median is shown by the <span style="color:blue">solid blue line</span>.'}
 
 ggplot(bindin , aes(x = percentAAfertilization))+
   geom_histogram(bins = 8, color = "white")+
@@ -350,7 +350,7 @@ ggplot(river.length , aes(x=1, y=river_length))+
 
 #### Calculating the range and IQR in R.  
 
-Staying with the `rivers` data set, let's see how we can calculate these summaries in R. As I showed with the mean, I'll first worth through example codes that shows all the steps and helps use understand what we are calculating, before showing R shortcuts.
+Staying with the `rivers` data set, let's see how we can calculate these summaries in R. As I showed with the mean, I'll first work through example codes that shows all the steps and helps us understand what we are calculating, before showing R shortcuts.
 
 To calculate the range, we need to know the minimum and maximum values, which we find with the [`min()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) and [`max()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html).
 
@@ -379,7 +379,7 @@ include_app("https://brandvain.shinyapps.io/nonparametric/")
 
 The variance, standard deviation, and coefficient of variation all communicate how far individual observations are expected to deviate from the mean. However, because (by definition) the differences between all observations and the mean sum to zero ($\Sigma x_i = 0$), these summaries work from the squared difference between observations and the mean.
 
-To work through these ideas and calculations, let's return to the bindin data sorted from lowest to highest percent fertilization, and looking only a females from the BBpopulation (we called this `bindin.BB`). As a reminder, the mean percentage of BB females’ eggs fertilized by AA males was 0.41. Before any calculations, lets make a simple plot to help investigate these summaries:
+To work through these ideas and calculations, let's return to the bindin data sorted from lowest to highest percent fertilization, and looking only a females from the BB population (we called this `bindin.BB`). As a reminder, the mean percentage of BB females’ eggs fertilized by AA males was 0.41. Before any calculations, lets make a simple plot to help investigate these summaries:
 
 ```{r, bindinvar1, fig.cap = 'Visualizing variability. **A)** The red dots show the proportion of each females (from population BB) eggs fertilized by males from population AA. The solid black lines show the difference between these values and the mean (<span style="color: Blue;">  dotted blue line</span>). **B)** The proportion of each females (from population BB) eggs fertilized by males from population AA is shown on the x-axis. The y-axis shows the squared difference between each observation and the sample mean (<span style="color: Blue;">dotted blue line</span>). The solid black line highlights the extent of these values.', echo=FALSE}
 include_graphics("images/bindin-var-1.png")
@@ -452,7 +452,7 @@ bindin.BB %>%
 ```
 
 
-So, now the we have the squared deviations, we can calculate all of our summaries of interest. But there is a bit of new R to learn.    
+So, now that we have the squared deviations, we can calculate all of our summaries of interest. But there is a bit of new R to learn.    
 
 - I introduce the [`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) function to find the standard deviation square root of the variance.     
 - I introduce the [`unique()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html) function to go from our mean repeated values of the mean in above, to just one representation of the value in our coefficient of variation calculation.   

@@ -85,7 +85,7 @@ Also -- while there is A LOT in this chapter, it does not show you how to do eve
 
 ## How to implement best practices and make fun and attractive plots    
 
-In chapter \@ref(viz1) we introduced ggplot as a way to make figures, and in chapter \@ref(goodfigs) we talked about what makes a good plot. **So now you might b a bit frustrated as you know how to make plots in R, and you know what makes a good plot, but you can't make a good plot in R.** I have two answers:    
+In chapter \@ref(viz1) we introduced ggplot as a way to make figures, and in chapter \@ref(goodfigs) we talked about what makes a good plot. **So now you might be a bit frustrated as you know how to make plots in R, and you know what makes a good plot, but you can't make a good plot in R.** I have two answers:    
 
 1. Choosing  the right plot for your data can get you  far in making a nice exploratory plot,  which will be about 95% of the plots you make. So most plots will only require one or two small quick R tricks.     
 
@@ -200,7 +200,7 @@ In section \@ref(goodplot) we said good plots are
 Here I add Fun to the list too! So how do we translate these ideas into R plots? Check out these tips and tricks below!!!
 
 ```{block2, type='rmdwarning'}
-Making and critiquing plots is one of my favorite parts of science -- I love it!!!! **But I know it can be a huge time suck**, and we dont want that. Here are  my tips to avoid spending too much time on every figure.   
+Making and critiquing plots is one of my favorite parts of science -- I love it!!!! **But I know it can be a huge time suck**, and we do not want that. Here are  my tips to avoid spending too much time on every figure.   
 
 
 - Know if you are making an explanatory or exploratory figure -- and do not try to perfect an exploratory figure.   
@@ -224,7 +224,7 @@ The most common ways figures deceive is with inappropriate limits, nonlinear (or
 #### Making Honest figures: Set your limits {- #lim}   
 
 
-The data on daphnia resistance to cyanobacteria is reported as a proportion, which are often best presented on a sale from zero to one. However a simple plot with `geom_point()` spans the range of the data, and does not go from zero to one. Set `limits` in the [`scale_y_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html) function to change this
+The data on daphnia resistance to cyanobacteria is reported as a proportion, which are often best presented on a scale from zero to one. However a simple plot with `geom_point()` spans the range of the data, and does not go from zero to one. Set `limits` in the [`scale_y_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html) function to change this
 
 
 ```{r scaleycont, fig.cap='Set x or y limits in the [`scale_x_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html) or [`scale_y_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html) functions. *Note* there are other ways to set limits, but this is the way I do it.', fig.height= 2, fig.width=3, message=FALSE}
