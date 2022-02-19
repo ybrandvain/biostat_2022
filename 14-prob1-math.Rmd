@@ -38,7 +38,7 @@ These notes accompany portions of Chapter 5  --- *Probability* --- of our textbo
 ```
 
 
-<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">  We want to understand how seemingly important patterns can arise by chance, how to think about chance events, how to think quantiatively about chance events, and gain an appreciation for a foundational concern of statistics and how the filed addresses this concern. </span> 
+<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">  We want to understand how seemingly important patterns can arise by chance, how to think about chance events, how to think quantitatively about chance events, and gain an appreciation for a foundational concern of statistics and how the filed addresses this concern. </span> 
  
 **Learning goals: By the end of this chapter you should be able to**   
 
@@ -58,7 +58,7 @@ In addition to this reading,  the other assignment is to **listen to 5 minutes (
 
 
 ```{r echo  = FALSE, fig.cap = "hello"}
-html_tag_audio("images/nocoincidence.mp3", type = "mp3")
+html_tag_audio("images/images_nocoincidence.mp3", type = "mp3")
 ```
 
 
