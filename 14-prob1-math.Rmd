@@ -560,7 +560,7 @@ This reversal of conditional probabilities is critically important in many arena
 ```
 
 
-## Probabilitic thinking by simulation: Quiz and Summary  
+## Probability rules and math: Quiz and Summary  
 
 Go through all "Topics" in the `learnR` tutorial, below. Nearly identical will be homework on canvas.
 
