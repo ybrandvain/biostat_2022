@@ -81,7 +81,7 @@ sickness_replicates <- tibble(
                          size = ___ * ___,
                          replace = TRUE,
                          prob = c(___, 1-___)),
-  rep_id = rep(1:n_tests, each = ___))
+  rep_id = rep(1:n_reps, each = ___))
 
 sickness_sampling_dist <- sickness_replicates %>%
   group_by(___) %>% 
@@ -98,14 +98,14 @@ ggplot(data = sickness_sampling_dist, aes(x = prop_sick)) +
 ```{r simreps-solution}
 n_tests  <- 10000
 p_sick   <- 0.02
-n_reps     <- 1000
+n_reps   <- 1000
 
 sickness_replicates <- tibble(
   actual_status = sample(c("sick","healthy"),
                          size = n_tests * n_reps,
                          replace = TRUE,
                          prob = c(p_sick, 1-p_sick)),
-  rep_id = rep(1:n_tests, each = n_reps))
+  rep_id = rep(1:n_reps, each = n_tests))
 
 sickness_sampling_dist <- sickness_replicates %>%
   group_by(rep_id) %>% 
@@ -117,7 +117,7 @@ ggplot(data = sickness_sampling_dist, aes(x = prop_sick)) +
 
 # find the standard error for the proportion of  
 sickness_sampling_dist %>% 
-  summarise(se = sd(prop_sick ))
+  summarise(se = sd(prop_sick))
 ```
 
 
@@ -239,7 +239,7 @@ Use math to find the expected proportion of people who are diagnosed as sick who
 ```{r calculator2, exercise=TRUE, eval=FALSE}
 p_testsick_givensick       <- 0.94
 p_testhealthy_givenhealthy <- 0.995
-p_sick                     <- 0.10
+p_sick                     <- 0.02
 
 # use bayes theorem from last chapter 
 # tmath here!!! 

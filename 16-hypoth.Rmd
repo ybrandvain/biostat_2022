@@ -125,7 +125,7 @@ Steps 1-3 are pretty straightforward,
 **We look into biological hypotheses with statistical hypotheses.**   
 
 - Statistical hypotheses are boring.    
-- In null hypothesis significance testing we keep looking into the same two biological hypotheses.   
+- In null hypothesis significance testing we keep looking into the same two statistical hypotheses.   
 - In null hypothesis significance testing statistical hypotheses don't know or care about your theories, or have any sense of an effect size.    
 
 
@@ -186,14 +186,14 @@ Rare cases when a one-tailed test is appropriate are when both ways to be extrem
  
 So how do we evaluate if our data are easily produced by the null mode? The first step is to find one summary of our data. This summary is called a **test statistic**. For now let's summarize our results as the number of cases in the vaccine group divided by all of the cases in the study.   
 
-For  covid cases in the Moderna study, this equals $\frac{11}{11+185} = \frac{11}{11+185} \approx 0.0561$.   
+For  covid cases in the Moderna study, this equals $\frac{11}{11+185} = \frac{11}{196} \approx 0.0561$.   
 
-A test statistics can be just about anything that makes sense, but commonly used test-statics, such as the $F$,  $\chi^2$, $Z$, and $t$, etc. etc, are special because their behavior is so well understood.   
+A test statistics can be just about anything that makes sense, but commonly used test-statistics, such as the $F$,  $\chi^2$, $Z$, and $t$, etc. etc, are special because their behavior is so well understood.   
 
  
 ### The sampling distribution under the null hypothesis   
 
-Because the null model is specific, we can generate the expected distribution of the test statistic by generating a sampling distribution from the the null model. For now, I will provide you with sampling distributions of test-statics under he null. Later we will learn more about how we can generate this distribution.  
+Because the null model is specific, we can generate the expected distribution of the test statistic by generating a sampling distribution from the the null model. For now, I will provide you with sampling distributions of test-statics under the null. Later we will learn more about how we can generate this distribution.  
 
 We can visualize the sampling distribution under the null as a histogram, as we would any other sampling distribution:   
 
@@ -414,11 +414,11 @@ Students struggle to understand the meaning of a p-value, and I think it's becau
 2. P-values don't measure the thing we care about.    
    - They have nothing to do with the alternative hypothesis.  
    - They have even less to do with the motivating biological hypothesis.  
-3. Null hypothesis significance testing is not logically sound. We want to know about something that's not the null, and we never ever consider the alternative model, we simply pretend that the alternative hypothesis is likely right in cases when the observations are unusual for the null distribution.   
+3. Null hypothesis significance testing is not logically sound. We want to know about something that's not the null, and we never ever consider the alternative model, we simply pretend that the alternative hypothesis is likely right in cases when the observations are unusual for the null model.   
 
 The common misinterpretations below, I believe reflect people wishing a p-value reported something useful or logical.     
 
-**A P-VALUE IS NOT**  "the probability that the null hypothesis is true" **NOR IS IT** "the probability that what we observed is due to chance". These are both wrong because. But I sympathize with these misinterpretations, because it would be great if that's what a P-value told us. 
+**A P-VALUE IS NOT**  "the probability that the null hypothesis is true" **NOR IS IT** "the probability that what we observed is due to chance". These are both wrong because the p-value is simply the probability that we would observe our data or something more extreme ASSUMING THE NULL HHYPOTHESIS IS TRUE. But I sympathize with these misinterpretations, because it would be great if that was what a P-value told us. 
 
 **A P-VALUE DOES NOT**  say anything about the alternative hypothesis. A p-value simply describes how weird it would be for the null model to generate such an extreme result. Again, I understand the desire to have the p-value tell us about the alternative hypothesis, because this is usually more interesting. Sadly, p-values cant do that.  
 
@@ -543,7 +543,7 @@ We substitute some fancy words here, without making any math changes. We call
 
 $$\text{Posterior Probability} = \frac{\text{Likelihood}(\text{Model}|\text{Data}) \times \text{Prior}}{\text{Evidence}}$$
 
-Notably, this also mean that we can study "credible intervals" -- regions with a 95% probability of containitng the true population parameter, as opposed to "confidence intervals" which cannot do this. 
+Notably, this also mean that we can study "credible intervals" -- regions with a 95% probability of containing the true population parameter, as opposed to "confidence intervals" which cannot do this. 
 
 
 
