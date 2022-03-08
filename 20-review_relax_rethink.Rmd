@@ -1,0 +1,110 @@
+# Reflect Review and Relax {#break}
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(gridExtra)
+library(DT)
+library(knitr)
+library(blogdown)
+library(stringr)
+library(tweetrmd)
+library(emo)
+library(tufte)
+library(cowplot)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(ggforce)
+library(datasauRus)
+library(ggridges)
+library(randomNames)
+library(infer)
+library(tiktokrmd)
+library(ggridges)
+library(colorspace)
+library(ggfortify)
+library(broom)
+library(ggrepel)
+library(emojifont)
+library(car)
+library(magrittr)
+library(plotly)
+options(crayon.enabled = FALSE)   
+```
+
+
+
+
+
+<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">   We are taking stock of where we are in the term. Thinking about stats and science, and making sure we understand the material to date.</span>
+
+```{block2, type='rmdnote'}
+**Required reading / Viewing:**  
+  
+The Science of Doubt. [link](https://youtu.be/cESuNcx28_I?t=680). By Michael Whitlock.    
+```
+
+
+## Review / Setup   
+
+- So much of stats aims to learn the TRUTH.    
+
+- We focus so much on our data and how to measure uncertainty around estimates and (in)compatibility of data with a null model. We will review and solidify this, but     
+- Recognize that so much beyond sampling error can mislead us.    
+
+##  How science goes wrong     
+
+Watch the video below. Whe you do, consider these types of errors that accompanny science. You should be able to think about htese and as good questions about them.
+
+- Fraud.  
+- Wrong models.     
+- Experimental design error.    
+- Communication error.  
+- Statistician error.    
+- Harking.      
+- Coding error.    
+- Technical Error.  
+- Publication bias.   
+
+
+You should have something to say about   
+
+- The "replication crisis", and 
+- If/why preregistration of studies is a good idea.    
+
+```{r, whitlock,fig.cap = "Watch this hour long  [video](https://www.youtube.com/watch?v=PWCtoVt1CJM) on *The science of Doubt* by Michael Whitlock.", echo=FALSE, out.extra= 'allowfullscreen'}
+include_url("https://www.youtube.com/embed/cESuNcx28_I?start=680")
+```
+
+**A brief word on publication bias** Scientists are overworked and have too much to do. They get more rewards for publishing statistically significant results, so those are usually higher on the to do list. This results in the *file drawer effect* in which non-significant results are less likely to be submitted for publication.
+
+
+
+```{block2, type='rmdnote'}
+**I find this stuff fascinating**  If you want more, here are some good resources.    
+A response to whitlock from Butch brodie [link](https://youtu.be/PVsI3dfrOAk?t=960)   
+Videos from calling bullshit -- largely redundant with video above): 7.2 [Science is amazing, but...](https://www.youtube.com/watch?v=EONB0_RyVKU),  7.3 
+[Reproducibility](https://www.youtube.com/watch?v=6VySTivCvlg), 7.4 [A Replication Crisis](https://www.youtube.com/watch?v=3hyMXhw2syM), 7.5  [Publication Bias](https://www.youtube.com/watch?v=BenytbfaMMI), and 7.6 [Science is not Bullshit](https://www.youtube.com/watch?v=4CzWsPJ9Pms).  
+- **The replication crisis**    
+     - *Estimating the reproducibility of psychological science* [@repcris2015]   [link](https://drive.google.com/file/d/11NB7VMJDxUTODlj6s8V432AbSJIAe4WB/view), 
+     - *A glass half full interpretation of the replicability of psychological* [@leek2015]    [link](https://arxiv.org/pdf/1509.08968.pdf),    
+     - *The Persistence of Underpowered Studies in Psychological Research: Causes, Consequences, and Remedies* [@maxwell2004] [link](http://statmodeling.stat.columbia.edu/wp-content/uploads/2017/07/maxwell2004.pdf).   
+- **P-hacking** *The Extent and Consequences of P-Hacking in Science*  [@head2015] [link](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002106).   
+- *The garden of forking paths: Why multiple comparisons can be a problem, even when there is no "fishing expedition" or "p-hacking" and the research hypothesis was posited ahead of time∗ [link](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf).
+```
+
+##  Review   
+
+You should be pretty comfortable with the ideas of   
+
+- Parameters vs Estimates    
+- Sampling and what can go wrong   
+- Uncertainty 
+- The sampling distribution
+- Null hypothesis significance testing   
+    - False positives
+    - False Negatives
+    - What a p-value is and is not
+
+
+## Homework on Canvas

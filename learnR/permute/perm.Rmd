@@ -218,8 +218,30 @@ penguin_perm_sexdiff <- replicate(n = n_reps, simplify = FALSE,
      mutate(sex_diff_mass = male - female))%>% 
   bind_rows()
 
-p.val <- perm_dist %>%
+p.val <- penguin_perm_sexdiff  %>%
   mutate(as_or_more_extreme =  __(___) __ abs(__)) %>%
+  summarise(p_val = mean(as_or_more_extreme))
+
+
+p.val
+```
+
+```{r perm-solution}
+n_reps <- 1000
+
+penguin_perm_sexdiff <- replicate(n = n_reps, simplify = FALSE, 
+  expr = my_penguins %>%
+   dplyr::select(sex, body_mass_g) %>%
+   mutate(perm_sex = sample(sex, replace = FALSE)) %>% ## resample with replacement to bootstrap
+     group_by(perm_sex) %>%
+     summarize(mean_body = mean(body_mass_g)) %>%
+     pivot_wider(names_from = perm_sex, values_from = mean_body) %>%
+     mutate(sex_diff_mass = male - female))%>% 
+  bind_rows()
+
+
+p.val <- penguin_perm_sexdiff %>%
+  mutate(as_or_more_extreme =  abs(sex_diff_mass) >= abs(638.9493)) %>%
   summarise(p_val = mean(as_or_more_extreme))
 
 

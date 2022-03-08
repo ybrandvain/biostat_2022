@@ -169,7 +169,7 @@ Adapt the code below to familiarize yourself with differences between the covari
 
 ```{r est2, exercise=TRUE, eval = FALSE}
 my_penguins %>%
-  mutate(body_mass_kg        = body_mass_g / 1000),
+  mutate(body_mass_kg        = body_mass_g / 1000) %>%
   summarize(cov_flip_body_g   = __(__, __),
             cov_flip_body_kg  = __(__, __),
             cor_flip_body_g   = __(__, __),
