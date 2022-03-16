@@ -32,7 +32,7 @@ This text (roughly) follows Chapter 10 and parts of Chapter 13 of our textbook. 
 
 
 
-<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">   We  want to understand what's so special about the normal distribution -- what are its properties? Why do we see it so often? Why di we use it so often? What is it good for?....  </span>
+<span style="color: Blue;font-size:22px;">   Motivating scenarios:  </span>  <span style="color: Black;font-size:18px;">   We  want to understand what's so special about the normal distribution -- what are its properties? Why do we see it so often? Why d0 we use it so often? What is it good for?....  </span>
 
 
 **Learning goals: By the end of this chapter you should be able to**    
@@ -62,7 +62,7 @@ The binomial distribution (Chapter \@ref(binomial)) is a discrete distribution -
 By contrast, the probability of any one outcome from a continuous distribution, like the **normal distribution**, is infinitesimally small because there are infinite numbers in any range. We therefore describe continuous distributions with probability densities. *Probability densities integrate to one (i.e. $\int p_x=1$), and can therefore even exceed one for some points.*  (e.g. Fig \@ref(fig:norm1))
 
 
-```{r norm1, fig.cap = "A normal distribution with a mean of one and standard deviation of 0.2.", fig.height=2,fig.width=4, echo=FALSE}
+```{r norm1, fig.cap = "A normal distribution with a mean of zero and standard deviation of 0.2.", fig.height=2,fig.width=4, echo=FALSE}
 ggplot(data = data.frame(x = c(-1, 1)), aes(x)) +
     stat_function(fun = dnorm, n = 1001, args = list(mean = 0, sd = .2),geom = "density", fill = "orange", color = NA) +
   scale_y_continuous(expand = c(0,0))+
@@ -104,24 +104,24 @@ The probability density for each value on the x equals   <span style="color: lig
 \begin{equation}
 f(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}e^{-{\frac {1}{2}}\left({\frac {x-\mu }{\sigma }}\right)^{2}}
 (\#eq:normal)
-\end{equation} 
+\end{equation}
 
-We efficiently describe a normally distributed random variable as $X \sim  N(\mu,\sigma^2)$, where $\sim$ means *is distributed*. So, the mathematical notation to say $X$ is normally distributed with mean $\mu = 0.5$ and variance $\sigma^2 = 0.1^2$ is $X \sim N(0.5,0.01)$.
+We efficiently describe a normally distributed random variable as $X \sim  N(\mu,\sigma^2)$, where $\sim$ means *is distributed* (e.g. $X$ is normally distributed with a mean \mu and variance \sigma^2). So, the mathematical notation to say $X$ is normally distributed with mean $\mu = 0.5$ and variance $\sigma^2 = 0.1^2$ is $X \sim N(0.5,0.01)$.
 
 
 
 
 ### Using R to claculate a probability density   
 
-Like the `dbinom()` function calculates the probability of a given observation from a binomial distribution by doing the math of the binomial distribution for us, [`dnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) calculates the probability density of an observation from a normal distribution by plugging and chugging through Equation \@ref(eq:normal). 
+Like the `dbinom()` function calculates the probability of a given observation from a binomial distribution by doing the math of the binomial distribution for us, [`dnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) calculates the probability density of an observation from a normal distribution by plugging and chugging through Equation \@ref(eq:normal).
 
-For example, `dnorm(x = .4, mean = .5, sd = .1)` goes through Eq. \@ref(eq:normal), plugging in $0.4$ for $x$, $0.5$ for $\mu$, and $0.1$ for $\sigma$ to return `r dnorm(x = .4, mean = .5, sd = .1) %>% round(digits = 2)`. 
+For example, `dnorm(x = .4, mean = .5, sd = .1)` goes through Eq. \@ref(eq:normal), plugging in $0.4$ for $x$, $0.5$ for $\mu$, and $0.1$ for $\sigma$ to return `r dnorm(x = .4, mean = .5, sd = .1) %>% round(digits = 2)`.
 
 ### The probability density of a sample mean   
 
-Remember that the standard deviation of the sampling distribution is called the standard error. It turns out that the standard error of a sample of size n from the normal distribution equals $\frac{\sigma}{\sqrt{n}}$. 
+Remember that the standard deviation of the sampling distribution is called the standard error. It turns out that the standard error of a sample of size n from the normal distribution equals $\frac{\sigma}{\sqrt{n}}$.
 
-So, we get probability density of a sample mean by substituting $\sigma$ in Equation \@ref(eq:normal) with the standard error $\frac{\sigma}{\sqrt{n}}$. Therefore, while the probability density that a random draw from a normal distribution with  $\mu =0.5$ and $\sigma = 0.1$ equals `0.4` is  `dnorm(x = .4, mean = .5, sd = .1) ` =  `r dnorm(x = .4, mean = .5, sd = .1) %>% round(digits = 2)`. 
+So, we get probability density of a sample mean by substituting $\sigma$ in Equation \@ref(eq:normal) with the standard error $\frac{\sigma}{\sqrt{n}}$. Therefore, while the probability density that a random draw from a normal distribution with  $\mu =0.5$ and $\sigma = 0.1$ equals `0.4` is  `dnorm(x = .4, mean = .5, sd = .1) ` =  `r dnorm(x = .4, mean = .5, sd = .1) %>% round(digits = 2)`.
 
 By contrast **the probability density that the mean of a sample size `25` from the distribution equals `0.4` is**   
 
@@ -132,18 +132,18 @@ By contrast **the probability density that the mean of a sample size `25` from t
 
 
 ```{block2, type='rmdwarning'}
-You should definitely know that the standard deviation of a normal sampling distribution, $\sigma_\overline{x}$ (aka its standard error) is the standard deviation divided by the square root of sample size.  $\sigma_\overline{x} = \frac{\sigma}{\sqrt{n}}$ 
+You should definitely know that the standard deviation of a normal sampling distribution, $\sigma_\overline{x}$ (aka its standard error) is the standard deviation divided by the square root of sample size.  $\sigma_\overline{x} = \frac{\sigma}{\sqrt{n}}$
 ```
 
 
 ### The standard normal distribution and the Z transform  
 
-The most famous normal distribution, the "standard normal distribution" (aka Z*, has a mean of zero and a standard deviation of one. That is,  $X \sim N(0,1)$.      
+The most famous normal distribution, the "standard normal distribution" (aka Z), has a mean of zero and a standard deviation of one. That is,  $X \sim N(0,1)$.      
 
-Any normal distribution can be converted to the standard normal distribution by subtracting the population mean, $\mu$,  from each value and dividing by the population standard deviation, $\sigma$ (aka the Z transform). 
+Any normal distribution can be converted to the standard normal distribution by subtracting the population mean, $\mu$,  from each value and dividing by the population standard deviation, $\sigma$ (aka the Z transform).
 
 $$Z=\frac{X-\mu }{\sigma }$$
-So, for example, by a Z transform, a value of $X=0.4$ from a normal distribution with $\mu = 0.5$ and $\sigma = 0.1$, will be $\frac{0.4 -0.5}{0.1} = \frac{-0.1}{0.1} = -1$. 
+So, for example, by a Z transform, a value of $X=0.4$ from a normal distribution with $\mu = 0.5$ and $\sigma = 0.1$, will be $\frac{0.4 -0.5}{0.1} = \frac{-0.1}{0.1} = -1$.
 
 ```{block2, type='rmdwarning'}
 The Z transform is useful because we can then have a simple way to talk about results on a common scale.   I think of a Z value as the number of standard deviations between an observation and the population mean.   
@@ -159,13 +159,13 @@ The Z transform is useful because we can then have a simple way to talk about re
 my.mean <- 2;  my.sd <-1
 tibble(x = seq(-2,6,length=1000), prob_density = dnorm(x,mean=my.mean,sd=my.sd))  %>%
   ggplot(aes(x=x, y =  prob_density))+
-  geom_density(stat = "identity", fill = "lightblue", alpha = .6) + 
-  scale_y_continuous(expand = c(0, 0)) + 
+  geom_density(stat = "identity", fill = "lightblue", alpha = .6) +
+  scale_y_continuous(expand = c(0, 0)) +
   ylab(label = "probability density")  +
  # theme_tufte()             +
-  scale_x_continuous(labels = NULL)+ 
+  scale_x_continuous(labels = NULL)+
   geom_vline(xintercept = my.mean, color = "red")+
-  geom_segment(data = tibble(x = c(1,3), y = dnorm(x,mean=my.mean,sd=my.sd)), aes(x=x, xend = 1,y=y, yend = y), size = 1, arrow = arrow(length = unit(0.075, "inches"),ends = "both")) + 
+  geom_segment(data = tibble(x = c(1,3), y = dnorm(x,mean=my.mean,sd=my.sd)), aes(x=x, xend = 1,y=y, yend = y), size = 1, arrow = arrow(length = unit(0.075, "inches"),ends = "both")) +
   geom_segment(data = tibble(x = c(1,3), y = dnorm(x,mean=my.mean,sd=my.sd)), aes(x=x, xend = c(1,3),y=y, yend = 0), size = 1, lty = 3)+
   theme(axis.line = element_line())
 ```
@@ -200,36 +200,36 @@ Some helpful (approximate) ranges:
 
 
 ```{r, fig.height=2, fig.width=6, echo=FALSE}
-tibble(x = seq(-5,5,.001), `66% within 1 sd of mean` = dnorm(x = x), `95% within 2 sd of mean` = dnorm(x = x)) %>% 
+tibble(x = seq(-5,5,.001), `66% within 1 sd of mean` = dnorm(x = x), `95% within 2 sd of mean` = dnorm(x = x)) %>%
   gather(key = dist, value = prob_density,-x) %>%
   mutate(z = ifelse(dist == "66% within 1 sd of mean" & x >-1 & x < 1, "c", ifelse(dist == "95% within 2 sd of mean" & x >-2 & x< 2, "b","a"))) %>%
   ggplot(aes(x=x, y =  prob_density, fill = z))+
-  geom_density(stat = "identity", alpha = 1, show.legend = FALSE) + 
-  scale_y_continuous(expand = c(0, 0), limits  = c(0,.45)) + 
+  geom_density(stat = "identity", alpha = 1, show.legend = FALSE) +
+  scale_y_continuous(expand = c(0, 0), limits  = c(0,.45)) +
   ylab(label = "probability density")  +
   facet_wrap(~dist)+
-  scale_x_continuous(breaks = seq(-4,4,2), labels = 
+  scale_x_continuous(breaks = seq(-4,4,2), labels =
                        c( expression(-4~sigma),  expression(-2~sigma),
-                          expression(mu), 
+                          expression(mu),
                          expression(2~sigma),  expression(4~sigma)))+
   scale_fill_manual(values = c("white","lightblue","lightblue"))+
-  theme(axis.line = element_line(), 
+  theme(axis.line = element_line(),
         strip.text = element_text(size = 14))
 ```
 
 More exactly, the probability that X is within one standard deviation away from the mean equals   
 
-- The probability it is not more than one standard deviation less than its mean 
+- The probability it is not more than one standard deviation less than its mean
     - `pnorm(q = -1, mean = 0, sd = 1, lower.tail = FALSE)`   
     - = `r pnorm(q = -1, mean = 0, sd = 1, lower.tail = FALSE)%>% round(digits = 4)`     
-- Minus the probability it is not more than one standard deviation greater than its mean 
+- Minus the probability it is not more than one standard deviation greater than its mean
     - `pnorm(q = 1, mean = 0, sd = 1, lower.tail = FALSE)`   
     - = `r pnorm(q = 1, mean = 0, sd = 1, lower.tail = FALSE) %>% round(digits = 4)`.    
 - Which equals    
     - `0.841 - 0.158`   
-    - = `0.683` 
-    
-    
+    - = `0.683`
+
+
 <span style="color: lightgrey;">For this example we used the standard normal distribution for ease, but this is true for any normal distribution... e.g. `pnorm(q = 10, mean = 5, sd = 5, lower.tail = FALSE)` = `r pnorm(q = 10, mean = 5, sd = 5, lower.tail = FALSE) %>% round(digits = 4)`.</span>   
 
 #### Probability that a mean, $\overline{X}$, falls in a range   
@@ -238,10 +238,10 @@ Again, we can take advantage of the fact that the standard deviation of a sampli
 
 So, for example, the probability that the mean of four draws from the standard normal distribution is between -1 and 1 is  
 
-- The probablity is is greater than negative one 
+- The probablity is is greater than negative one
     - `pnorm(q = -1, mean = 0, sd = 1/sqrt(4), lower.tail = FALSE)`  
     - `r `pnorm(q = -1, mean = 0, sd = 1/sqrt(4), lower.tail = FALSE) %>% round(digits = 4)`     
-- Minus the probablity is greater than  one 
+- Minus the probablity is greater than  one
     - `pnorm(q = 1, mean = 0, sd = 1/sqrt(4), lower.tail =FALSE)`   
     - `r pnorm(q = 1, mean = 0, sd = 1/sqrt(4), lower.tail =FALSE) %>% round(digits = 4)`
 - Equals $0.977 - 0.022 = 0.955$   
@@ -262,7 +262,7 @@ tibble(sample = rep(1:n_reps, each = sample_size),
   group_by(sample)                              %>%
   summarise(mean_x          = mean(value))      %>%
   mutate(within_one         = abs(mean_x) < 1 ) %>%
-  summarise(prop_within_one = mean(within_one)) 
+  summarise(prop_within_one = mean(within_one))
 ```
 
 
@@ -274,7 +274,7 @@ include_graphics("https://media1.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif?cid
 
 ### Quantiles of a Normal Distribution  
 
-Above, I said that about 95% of samples are within two standard deviations of a normal distribution. That is a close approximation. Like our work above, we can find the proportion of samples within two standard deviations of the mean as `pnorm(q = 2, mean = 0, sd =1) - pnorm(q = -2, mean = 0, sd =1)` = `r pnorm(q = 2, mean = 0, sd =1) - pnorm(q = -2, mean = 0, sd =1)`. 
+Above, I said that about 95% of samples are within two standard deviations of a normal distribution. That is a close approximation. Like our work above, we can find the proportion of samples within two standard deviations of the mean as `pnorm(q = 2, mean = 0, sd =1) - pnorm(q = -2, mean = 0, sd =1)` = `r pnorm(q = 2, mean = 0, sd =1) - pnorm(q = -2, mean = 0, sd =1)`.
 
 But say we wanted to reverse this question, and find the values that separate the middle 95% of samples from the extremes (i.e. the critical values at $\alpha = 0.05$). The [`qnorm()`] function (where q is for quantile) is here for us. We find a two tailed critical value as `qnorm(p = 1 - alpha/2, mean = 0, sd = 1)`, where $\alpha$ is our specified alpha value and we divide by two because we're considering an equal area on both tails. So 95% of samples (of size one) from a normal distribution are within `qnorm(p = 1 - 0.05/2, mean = 0, sd = 1)` = `r qnorm(p = 1 - 0.05/2, mean = 0, sd = 1) %>% round(digits = 4)` standard deviations of the mean.   
 
@@ -306,7 +306,7 @@ We can see that points seem to be pretty close to the predicted line, but both t
 
 ### What normal distributions look like
 
-I am always surprised about how easily I can convince myself that a sample does not come from a normal distribution. To give you a sense 
+I am always surprised about how easily I can convince myself that a sample does not come from a normal distribution. To give you a sense
 
 
 
@@ -319,7 +319,7 @@ include_app("https://brandvain.shinyapps.io/standardnormal/",height = "660")
 
 Let's compare the samples from a normal distribution, in Figure \@ref(fig:isitnorm) to cases in which the data are not normal.   For example,  
 
-- Figure \@ref(fig:allsepal) makes it clear that across the three *Iris* species, sepal length is bimodal. 
+- Figure \@ref(fig:allsepal) makes it clear that across the three *Iris* species, sepal length is bimodal.
 - Figure \@ref(fig:msleepqq) makes it clear that across all mammals the distribution of body weights are exponentially distributed.   
 
 These examples are a bit extreme. Over the term, we'll get practice in visually assessing if data are normallish.
@@ -384,7 +384,7 @@ Because the normal distribution is so common, and because the central limit theo
 2. We can use/develop tools to model the data as they are actually distributed.   
 3. We can transform the data to meet our assumptions.   
 
-We have already discussed option 1 at length, and will return to option 3 later in the term. 
+We have already discussed option 1 at length, and will return to option 3 later in the term.
 
 ### Rules for legit transformations   
 
@@ -392,11 +392,11 @@ There is nothing "natural" about linear scale, so there is nothing wrong about t
 
 Rules for transforming data   
 
- 
+
 - Let biology guide you. Often you can think through what transformation is appropriate by thinking about a mathematical model describing your data. <font size = 4, color = "lightgrey">So, for example, if values naturally grow exponentially, you should probably log-transform  your data.</font>   
 - Apply the same transformation to each individual.   
 - Transformed values must have one-to-one correspondence to original values. <font color = "lightgrey">e.g. don't square if some values are $<0$ and some are $>0$.</font>      
-- Transformed values must have a monotonic relationship with the original values <font color = "lightgrey"> e.g., larger values stay larger, so be careful with trigonometric transformations.</font> 
+- Transformed values must have a monotonic relationship with the original values <font color = "lightgrey"> e.g., larger values stay larger, so be careful with trigonometric transformations.</font>
 - Conduct your statistical tests AFTER you settle on the appropriate transformation.  
 - Do not bias your results by losing data points when transforming the data.   
 
@@ -415,12 +415,12 @@ There are numerous common transformations that will make data normal, depending 
 
 Name | Formula| What type of data?
 ------------- | -------------|---
-Log | $Y'=\log_x(Y + \epsilon)$ | Right skewed 
-Square-root | $Y'=\sqrt{Y+1/2}$ | Right skewed 
-Reciprocal | $Y'=1/Y$ | Right skewed 
+Log | $Y'=\log_x(Y + \epsilon)$ | Right skewed
+Square-root | $Y'=\sqrt{Y+1/2}$ | Right skewed
+Reciprocal | $Y'=1/Y$ | Right skewed
 Arcsine | $\displaystyle p'=arcsin[\sqrt{p}]$ | Proportions
-Square | $Y'=Y^2$ | Left skewed 
-Exponential | $\displaystyle Y'=e^Y$ | Left skewed 
+Square | $Y'=Y^2$ | Left skewed
+Exponential | $\displaystyle Y'=e^Y$ | Left skewed
 
 
 #### **Transformation example: The log transformation** {-}   
@@ -432,7 +432,7 @@ Take our distribution of mammal body weights, for example. It is initially far f
 
 ```{r logmam, fig.cap = "The mammal body mass data is very far from normal as seen in the histogram (**A**) and qq-plot (**C**). After log_10 transformation, data are much closer to normal (**B** and **D**). log_10 was chosen over the natural log because it is easier for most readers to interpret", fig.width=4, fig.height=3.5, warning=FALSE, message=FALSE}
 # log10 transform
-msleep <-  mutate(msleep, log10_bodywt = log10(bodywt)) 
+msleep <-  mutate(msleep, log10_bodywt = log10(bodywt))
 
 # let's evaluate normality          
 plot_grid(
@@ -450,7 +450,7 @@ Be careful when log-transforming!! All data with a value of zero or less will di
 ```
 
 
-## Log Likelihood of $\mu$ 
+## Log Likelihood of $\mu$
 
 We have seen that calculating likelihoods is the basis for both maximum likelihood and Bayesian inference. How can we calculate likelihoods for a parameter of a normal distribution?  Here's how!  
 
@@ -469,7 +469,7 @@ We can find a likelihood profile as
 
 ```{r, fig.height=2, fig.width=3, message=FALSE}
 obs            <- c(0.01, 0.07, 2.2)
-proposed.means <- seq(-1, 2, .001) 
+proposed.means <- seq(-1, 2, .001)
 tibble(proposed_means = rep(proposed.means , each = length(obs)),
        observations   = rep(obs, times = length(proposed.means)),
        log_liks       = dnorm(x = observations, mean = proposed_means, sd = 1, log = TRUE)) %>%
