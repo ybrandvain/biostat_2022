@@ -62,16 +62,16 @@ This text (roughly) follows Chapter 11 of our textbook.   **The reading below is
 In Chapter \@ref(normal) we saw a bunch of useful math for samples from a normal distribution. Importantly, we saw that by Z-transformation ($Z = \frac{x-\mu}{\sigma}$ for one obervation, or $Z = \frac{\overline{x}-\mu}{\sigma / \sqrt{n}}$ for the mean of a sample of size $n$) we can meaningfully summarize values as their distance, in standard deviations, away from the population mean.  
 
 
-But, their is one problem here. **We usually have a sample estimate of the standard deviation $s$, not its true population parameter, $\sigma$**. Because of this, the standard normal distribution (aka the Z distribution) is not quite right (although it is almost right), because it does not incorporate uncertainty in our estimate of the standard deviation.  
+But, there is one problem here. **We usually have a sample estimate of the standard deviation $s$, not its true population parameter, $\sigma$**. Because of this, the standard normal distribution (aka the Z distribution) is not quite right (although it is almost right), because it does not incorporate uncertainty in our estimate of the standard deviation.  
 
 
 **The solution**  
 
-The solution to this dilemma is to use a sampling distribution, called the t-distribution, that includes uncertainty in our estimate of the standard deviation.  There are many t-distributions -- each associated with some numbers of degrees of freedom (remember this is the number of observations whose values can vary before you know them all). 
+The solution to this dilemma is to use a sampling distribution, called the t-distribution, that includes uncertainty in our estimate of the standard deviation.  There are many t-distributions -- each associated with some numbers of degrees of freedom (remember this is the number of observations whose values can vary before you know them all).
 
 
 
-A t-distribution looks a lot like the standard normal distribution, however, the tails are "fatter" to model the possibility that we underestimated $s$. As our sample (and therefore our degrees of freedom) gets larger, the t distribution gets closer and closer to the standard normal distribution (Fig \@ref(fig:t)) because our confidence in the estimate of the standard deviation increases. 
+A t-distribution looks a lot like the standard normal distribution, however, the tails are "fatter" to model the possibility that we underestimated $s$. As our sample (and therefore our degrees of freedom) gets larger, the t distribution gets closer and closer to the standard normal distribution (Fig \@ref(fig:t)) because our confidence in the estimate of the standard deviation increases.
 
 ```{r, echo=FALSE, eval=FALSE}
 library(colorspace)
@@ -94,7 +94,7 @@ anim <- bind_rows(tibble(value = c(0,0),df = 0, prob_density = c(0,0), id = ""),
   geom_text(data = . %>% group_by(df, id) %>% summarise(value = -7, prob_density = 0.06),
             aes(label = id), hjust= 0, size =5)+
   labs(title = "Comparing Z and t distributions",subtitle = "Across t's degrees of freedom")+
-  theme(axis.text = element_text(size = 8), axis.title = element_text(size = 10), 
+  theme(axis.text = element_text(size = 8), axis.title = element_text(size = 10),
         plot.title =  element_text(size = 12),plot.subtitle =  element_text(size = 10))+
   transition_states(df,
                     transition_length = .2,
@@ -129,7 +129,7 @@ $$t = \frac{\overline{x}-\mu_0}{SE_x} = \frac{\overline{x}-\mu_0}{s/\sqrt{n}}$$
 
 The number of degrees of freedom describes how many individual values we need to know after building our model of interest, before we know every data point.
 
-For example, if you have a sample of size 
+For example, if you have a sample of size
 
 - $n = 1$, and  I tell  you the sample mean, you know every data point, and there are zero degrees of freedom.  
 - $n = 2$, and  I tell  you the sample mean, you need one more data point to fill in the rest, and there is one degree of freedom.   
@@ -144,18 +144,18 @@ So, when we are estimating a sample mean $\overline{x}$, the degrees of freedom 
 
 We use the t-distribution to find the $1-\alpha$% confidence interval for the estimated mean of a sample from a normal distribution.  
 
-To estimate the upper (or lower) $1-\alpha$ confidence intervals, we take our estimate and add (or subtract) the product of the sample standard error and the *critical value* which separates the middle $1-\alpha$ of the distribution from the rest of the distribution. <span style="color: lightgrey;">This makes sense because this should contain 95% of sample means estimated from a population.</span> 
+To estimate the upper (or lower) $1-\alpha$ confidence intervals, we take our estimate and add (or subtract) the product of the sample standard error and the *critical value* which separates the middle $1-\alpha$ of the distribution from the rest of the distribution. <span style="color: lightgrey;">This makes sense because this should contain 95% of sample means estimated from a population.</span>
 
 
-\begin{equation} 
+\begin{equation}
 \begin{split}
-(1-\alpha)\%\text{ CI }  &= \overline{x} \pm t_{\alpha/2} \times SE_x\\ 
+(1-\alpha)\%\text{ CI }  &= \overline{x} \pm t_{\alpha/2} \times SE_x\\
 &=  \overline{x} \pm t_{\alpha/2} \times s_x / \sqrt{n}
 \end{split}
 (\#eq:tCI)
-\end{equation} 
+\end{equation}
 
-Where $t_{\alpha/2}$ is the critical two-tailed t value for a specified  $\alpha$ value.    We  find $t_{\alpha/2}$ in R with the [`pt()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) function --- $t_{\alpha/2}$ = `qt(p = alpha/2, df = 9)`. **Remember** that we divide $\alpha$ by two in this calculation to include both sides of the sampling distribution. Figure shows the critical value (two-tailed $\alpha = 0.05$) for a sample from the t-distribution with nine degrees of freedom.  
+Where $t_{\alpha/2}$ is the critical two-tailed t value for a specified  $\alpha$ value.    We  find $t_{\alpha/2}$ in R with the [`qt()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) function --- $t_{\alpha/2}$ = `qt(p = alpha/2, df = 9)`. **Remember** that we divide $\alpha$ by two in this calculation to include both sides of the sampling distribution. Figure shows the critical value (two-tailed $\alpha = 0.05$) for a sample from the t-distribution with nine degrees of freedom.  
 
 
 
@@ -163,17 +163,17 @@ So, for example, we find  the lower bound of a 95% confidence interval from a sa
 
 - Lower 95% CI with 9 df = $\overline{x} + t_{.05/2,df =9} \times SE_x$   
 
-What is $t_{.05/2,df =9}$? From \@ref(fig:t9) it looks to be a bit less than 2.5.  Now let's find out what it is more precisely! 
+What is $t_{.05/2,df =9}$? From \@ref(fig:t9) it looks to be a bit less than 2.5.  Now let's find out what it is more precisely!
 
 ```{r t9, fig.cap = "The sampling distribution for *t* with nine degrees of freedom. Area in with is the middle 95% of the distribution", echo=FALSE, fig.height=2.4, fig.width=6}
 
 df <- 9
-tibble(x = seq(-5,5,.001), y = dt(x=x,df = df))%>% 
+tibble(x = seq(-5,5,.001), y = dt(x=x,df = df))%>%
   mutate(l = case_when( x > abs(qt(p = 0.025, df = df))~ "f1",
                         x < -1*abs(qt(p = 0.025, df = df))~ "f2",
                         TRUE~"a"))%>%
   ggplot(aes(x=x, y=y, fill = l )) +
-  geom_area(color = "black")+ 
+  geom_area(color = "black")+
   scale_fill_manual(values = c("white","red", "red"))+
   theme(legend.position = "none")+
   geom_vline(xintercept = c(-1,1)*qt(p = 0.025, df = df), color = "red",lty = 2)+
@@ -183,7 +183,7 @@ tibble(x = seq(-5,5,.001), y = dt(x=x,df = df))%>%
 
 #### Finding the critical value in R {-}  
 
-If you have taken stats elsewhere, you probably remember statistical tables you used for looking up critical values. R has these built in with the `q_` (for quantile) family of functions. For example if we had a sample of size 10, `qt(p = .025, df = 10 - 1, lower.tail = FALSE)` will find the t value that separates the upper  (because `lower.tail = FALSE`)   97.5% of the distribution from the rest. 
+If you have taken stats elsewhere, you probably remember statistical tables you used for looking up critical values. R has these built in with the `q_` (for quantile) family of functions. For example if we had a sample of size 10, `qt(p = .025, df = 10 - 1, lower.tail = FALSE)` will find the t value that separates the upper  (because `lower.tail = FALSE`)   97.5% of the distribution from the rest.
 
 Returning to our example, above,  we find  the lower bound of a 95% confidence interval from a sample of size 10 as  
 
@@ -208,7 +208,7 @@ tibble(df = rep(dfs, times = length(alphas)),
   geom_hline(data = tibble(alpha = c(.05, .01))%>% mutate(crit_z = qnorm(p = alpha / 2, lower.tail = FALSE)),
              aes(yintercept = crit_z, color = factor(alpha)))+
   facet_wrap(~alpha, labeller = "label_both")+
-  geom_text(data = tibble(alpha = c(.05, .01))%>% 
+  geom_text(data = tibble(alpha = c(.05, .01))%>%
               mutate(crit_z = qnorm(p = alpha / 2, lower.tail = FALSE),
                      label = paste("crit z =", round(crit_z, digits = 2))),
            aes(x = 2,y = crit_z - .52, color = factor(alpha,levels = c(0.05, 0.01)), label = label), hjust = 0)+
@@ -225,18 +225,18 @@ So, let's say we had a sample of size 10 and calculated a t value of -1.5. We wo
 
 ```{r p9, fig.cap = "The sampling distribution for *t* with nine degrees of freedom. Area in blue is as or more extreme than the test statitic, -1.5. Red lines show the critical value", echo=FALSE, fig.height=2.4, fig.width=6, message=FALSE, warning=FALSE}
 df <- 9
-tibble(x = seq(-5,5,.001), y = dt(x=x,df = df))%>% 
+tibble(x = seq(-5,5,.001), y = dt(x=x,df = df))%>%
   mutate(l = case_when( x > 1.5  ~ "f1",
                         x < -1.5 ~ "f2",
                         TRUE~"a"))%>%
   ggplot(aes(x=x, y=y, fill = l )) +
-  geom_area(color = "black")+ 
+  geom_area(color = "black")+
   scale_fill_manual(values = c("white","blue", "blue"))+
   theme(legend.position = "none")+
   geom_vline(xintercept = c(-1,1)*qt(p = 0.025, df = df), color = "red",lty = 2)+
   labs(x = "t-value", y = "probability density", title = "Sampling distribution for t with 9 degrees of freedom", subtitle = expression(paste("Blue shows values greater than our test of 1.5. Red shows the critical value for ", alpha," = 0.05, df = 9")))+
   annotate(label = "Draws from the null that\nare less extreme than ours", x = 0, y = .05, geom = "text", size = 3)+
-    annotate(label =  expression(paste("Crtical value (", alpha,"=0.05, df=9)")), 
+    annotate(label =  expression(paste("Crtical value (", alpha,"=0.05, df=9)")),
              x = 2.3, y = .35, geom = "text", size = 3, color = "red", hjust = 0)+
     annotate(label = "More extreme than test stat." ,
              x = 2.3, y = .075, geom = "text", size = 3, color = "blue", hjust = 0)
@@ -250,7 +250,7 @@ While I can't integrate well by eye (I would guess blue integrates to 0.2), this
 We can use the [`pt()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) function to find the probability that a random sample from the t distribution has a test statistic as or more than ours. In doing so, be sure to look at both sides!
 
 ```{r}
-df         <- 9 
+df         <- 9
 observed_t <- 1.5
 p_val      <- 2 * pt(q = observed_t, df = df, lower.tail = FALSE)
 ```
@@ -264,7 +264,7 @@ The t is useful for hypothesis testing and including uncertainty in our estimnae
 $$\text{Cohen's d} = \frac{\overline{x}-\mu_0}{s_x}$$.   
 
 
-## Assumptions of the t-distribution 
+## Assumptions of the t-distribution
 
 
 The t-distribution assumes that  
@@ -283,12 +283,12 @@ Whether the mean is a meaningful summary or not is a biological question.
 The normality assumption is easiest to deal with. If we violate this assumption we can:    
 - Ignore it (if the violation is minor) because the central limit theorem is there for us.  OR   
 - Transform the data to an appropriate scale OR  
-- Bootstrap to estimate uncertainty and/or conduct a binomial test, with numbers greater than $mu_0$ as "successed" and less than $\mu_0$ as "failures".
+- Bootstrap to estimate uncertainty and/or conduct a binomial test, with numbers greater than $\mu_0$ as "successed" and less than $\mu_0$ as "failures".
 
 
 ## Example of a one sample t-test   
 
-**Has Climate Change Moved Species Uphill?** 
+**Has Climate Change Moved Species Uphill?**
 
 A common use of the t-distribution is to test the null hypothesis that the mean takes some value. This is called a *one sample t-test*.  
 
@@ -303,18 +303,18 @@ range_shift <- read_csv(range_shift_file) %>%
 ggplot(range_shift, aes(x = x, y = elevationalRangeShift))+
   geom_jitter(aes(color = uphill), width = .05, height = 0, size = 2, alpha = .7)+
   geom_hline(yintercept = 0, lty= 2)+
-  stat_summary(fun.data = "mean_cl_normal") + 
+  stat_summary(fun.data = "mean_cl_normal") +
   theme(axis.title.x = element_blank())
 ```
 
-### Estimation 
+### Estimation
 
 The first step is to summarize the data. Let's calculate the mean, sample size, standard deviation and Cohen's D (assumin $\mu_0$ = 0).
 
 ```{r, warning=FALSE, message=FALSE}
 mu_0 <- 0
 range_shift_summary  <- range_shift %>%
-  summarise(n = n(), 
+  summarise(n = n(),
             this_mean = mean(elevationalRangeShift),
             this_sd   = sd(elevationalRangeShift ),
             cohens_d = (this_mean - mu_0) / this_sd)
@@ -338,8 +338,8 @@ range_data <- range_shift %>%
 ggplotly(range_data) # to allow readers to engage with the data
 ```
 
-- **Are date biased?** I hope not, but it would depend on aspects of study design etc. For example, we might want to know if species had as much area to increase in elevation as to decrease etc.... How were species picked....    
-- **Are Data independent?**    Check out the data above. My sense is that they aren't all independent. So much data is from the UK (Figure \@ref(fig:plotlyrange)). What if there is something specific about low elevation regions in the UK? Anyways, I wouldn't call this a reason to stop the analysis, but it is a good thing to consider.     
+- **Are data biased?** I hope not, but it would depend on aspects of study design etc. For example, we might want to know if species had as much area to increase in elevation as to decrease etc.... How were species picked....    
+- **Are data independent?**    Check out the data above. My sense is that they aren't all independent. So much data is from the UK (Figure \@ref(fig:plotlyrange)). What if there is something specific about low elevation regions in the UK? Anyways, I wouldn't call this a reason to stop the analysis, but it is a good thing to consider.     
 - **Is the mean a meaningful summary of the data?**  My sense is yes, but look for yourself!   
 - **Are samples (or more particularly, the sampling distribution) normal?**     My sense is yes, but look for yourself!  
 
@@ -426,19 +426,19 @@ Note this doesn't mean the null is wrong, it just means that we're proceeding as
 Or, more simply, we could use the [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) function in R, setting $\mu$ to its proposed value under the null hypothesis.
 
 ```{r}
-t.test(x = pull(range_shift, elevationalRangeShift), mu = mu_0) 
+t.test(x = pull(range_shift, elevationalRangeShift), mu = mu_0)
 ```
 
 Reassuringly, we get the same answer from [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) as we did from our calculations!  We still reject the null!  As a bonus, the [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) function also returns the confidence intervals, which again match our calculations!   
 
-Remember that the [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function in the [`broom`](https://broom.tidymodels.org/) package cleans up this awkward model output. To show you this, while pushing our concepts forward, let's run the same test again, but exclude samples from the UK, to minimize the possibility that our results are driven by one over-represented country 
+Remember that the [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function in the [`broom`](https://broom.tidymodels.org/) package cleans up this awkward model output. To show you this, while pushing our concepts forward, let's run the same test again, but exclude samples from the UK, to minimize the possibility that our results are driven by one over-represented country
 
 
 ```{r}
 library(broom)
 range_shift_noUK <- range_shift %>%
   filter(str_detect(taxonAndLocation,"UK", negate = TRUE)) # remove observations from UK
-  
+
 t.test(x = pull(range_shift_noUK, elevationalRangeShift), mu = mu_0)  %>%
   tidy()
 ```
@@ -454,10 +454,10 @@ Here the data clearly meet assumptions of normality -- but what if they didn't? 
 range_sign <-range_shift %>%
   mutate(sign = sign(elevationalRangeShift - mu_0)) %>%
   filter(sign != 0 ) %>% # remove zeros
-  summarise(n = n(), 
+  summarise(n = n(),
             up = sum(sign == 1))
 
-binom.test(x = pull(range_sign , up), n = pull(range_sign , n), p = mu_0) 
+binom.test(x = pull(range_sign , up), n = pull(range_sign , n), p = mu_0)
 ```
 
 ### Conclusion   
@@ -466,37 +466,37 @@ We find that on average species have shifted their range to higher elevations (a
 
 ## Paired t-test    
 
-A common use of this approach is to look for the difference between groups when there are natural pairs in each group. These pairs should be similar to each other in every way, aside from the difference we are investigating. 
+A common use of this approach is to look for the difference between groups when there are natural pairs in each group. These pairs should be similar to each other in every way, aside from the difference we are investigating.
 
 
 
 ```{block2, type='rmdwarning'}
-**Note that  we cant just pair up random individuals and call it a paired t-test.** 
+**Note that  we cant just pair up random individuals and call it a paired t-test.**
 
 For example, say we were interest to test the idea that more money resulted in more problems. So we gave some people \$100,000 and others \$1 and then got a quantitative and normally distributed measure of their problems.
 
 - If we  randomly gave twenty people \$100,000 and twenty people \$1, we **could not** just randomly form 20 pairs and do a paired t-test.    
-- But we could pair people by background (eg find a pair of waiters at similar restaurants give one  100k and another \$1, then do the same for a pair of professors, and a pair of hairdressers, and a pair of doctors, and a pair of programmers etc... until we ad twenty such pairs) we **could** then conduct a paired t-test.  
+- But we could pair people by background (eg find a pair of waiters at similar restaurants give one  100k and another \$1, then do the same for a pair of professors, and a pair of hairdressers, and a pair of doctors, and a pair of programmers etc... until we had twenty such pairs) we **could** then conduct a paired t-test.  
 ```
 
 
 
 ### Paired t-test example:  
 
-> @rutte2007 tested for the existence of "generalized reciprocity" in the Norway rat, *Rattus norvegicus*. That is, they asked whether a rat that had just been helped by a second rat would be more likely to help a third rat than if it had not been helped. Focal female rats were trained to pull a stick attached to a try that produced food for their partners but not themselves. Subsequently, each focal rat's experience was manipulated in two treatments. Under one treatment, the rat was helped by three unfamiliar rats (who pulled the appropriate stick). Under the other treatment, focal rats received no help from three unfamiliar rats (who did not pull the appropriate stick). Each focal rat was exposed to both treatments in random order. Afterword, each focal rat's tendency to pull for an unfamiliar partner rat was measured. The number of pulls in a given period (in pulls/min) by 19 focal female rats after both treatments is available [here](http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter12/chap12q31RatReciprocity.csv), and is plotted below. 
+> @rutte2007 tested for the existence of "generalized reciprocity" in the Norway rat, *Rattus norvegicus*. That is, they asked whether a rat that had just been helped by a second rat would be more likely to help a third rat than if it had not been helped. Focal female rats were trained to pull a stick attached to a try that produced food for their partners but not themselves. Subsequently, each focal rat's experience was manipulated in two treatments. Under one treatment, the rat was helped by three unfamiliar rats (who pulled the appropriate stick). Under the other treatment, focal rats received no help from three unfamiliar rats (who did not pull the appropriate stick). Each focal rat was exposed to both treatments in random order. Afterword, each focal rat's tendency to pull for an unfamiliar partner rat was measured. The number of pulls in a given period (in pulls/min) by 19 focal female rats after both treatments is available [here](http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter12/chap12q31RatReciprocity.csv), and is plotted below.
 
 
 ```{r ratdat, fig.cap = 'Evidence for generalized reciprocity? Lines connect how helpful individual rats where to others (measured as the number of pulls to give another rat food)  when the focal rate did or did not get help themselves. Data from @rutte2007.', message=FALSE, fig.height=3, fig.width=4}
 rat_link <- "http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter12/chap12q31RatReciprocity.csv"
-rat_dat  <- read_csv(rat_link) %>% 
+rat_dat  <- read_csv(rat_link) %>%
   mutate(help_minus_nohelp = AfterHelp - AfterNoHelp,
          sign = case_when(help_minus_nohelp == 0 ~ "0",
                           help_minus_nohelp >0   ~ "+",
                           help_minus_nohelp <0   ~ "-"))
 
 # Makng some plots!
-long_rat <-  rat_dat %>% 
-  pivot_longer(cols = contains("Help",ignore.case = FALSE), 
+long_rat <-  rat_dat %>%
+  pivot_longer(cols = contains("Help",ignore.case = FALSE),
                names_to = "treatment", values_to = "help_other", names_prefix = "After")
 
 ggplot(long_rat,  aes(x = treatment, y = help_other, group = focalRat, color = sign)) +
@@ -510,7 +510,7 @@ We can do a paired t-test by running a one-sample t-test on the difference betwe
 t.test(pull(rat_dat, help_minus_nohelp), mu = 0) %>%tidy()
 ```
 
-Or by telling R to do a paired t test as follows 
+Or by telling R to do a paired t test as follows
 
 ```{r}
 t.test(pull(rat_dat, AfterHelp),pull(rat_dat, AfterNoHelp), paired = TRUE) %>%tidy()
@@ -524,11 +524,11 @@ Either way, we get the exact same thing, and reject the null hypotheses, and con
 include_app("https://brandvain.shinyapps.io/tdist/")
 ```
 
-## Extra material for the advanced / bored / curious 
+## Extra material for the advanced / bored / curious
 
 ### Likelihood based inference for a sample from the normal  {#lklhd}
 
-We calculate the likelihoods and do likelihood-based inference for samples from a normal the exact same way as we did previously. 
+We calculate the likelihoods and do likelihood-based inference for samples from a normal the exact same way as we did previously.
 
 Because this all relies on pretending we are using population parameters. So we calculate the sd as the distance of each data point from the proposed mean, and divide by `n` rather than `n-1`.
 
@@ -549,8 +549,8 @@ The big benefits of likelihood-based inference are
 **Example:** Are species moving uphill
 
 #### **Calculate log likelihoods for each model**  {-}   
- 
-First we grab our observations, write down our proposed means -- lets say from negative one hundred to two hundred in increments of .01. 
+
+First we grab our observations, write down our proposed means -- lets say from negative one hundred to two hundred in increments of .01.
 
 ```{r warning=FALSE, message=FALSE}
 observations   <-  pull(range_shift, elevationalRangeShift)
@@ -597,7 +597,7 @@ ggplot(lnLik_uphill, aes(x = mu, y = lnLik))+
 
 We can use the likelihood profile (Fig \@ref(fig:likprof)) to do standard things, like  
 
-- make a best guess, 
+- make a best guess,
 - find confidence intervals,   
 - test null hypotheses   
 
@@ -626,7 +626,7 @@ CI <- lnLik_uphill %>%
 CI
 ```
 
-**Hypothesis testing by the likelihood ratio test** 
+**Hypothesis testing by the likelihood ratio test**
 
 We can find a p-value and test the null hypothesis by comparing the likelihood of our MLE ($log\mathcal{L}(MLE|D)$) to the likelihood of the null model ($log\mathcal{L}(H_0|D)$). We call this a likelihood ratio test, because we divide the likelihood of the MLE by the likelihood of the null -- but we're doing this in logs, so we subtract rather than divide.  
 
@@ -634,7 +634,7 @@ We can find a p-value and test the null hypothesis by comparing the likelihood o
 
 - $log\mathcal{L}(H_0|D)$   = Sum the log-likelihood of each observation under the null = `lnLik_uphill%>% filter(mu == 0 ) %>% pull(lnLik)` = `r lnLik_uphill%>% filter(mu == 0 ) %>% pull(lnLik) %>% round(digits =3)`.  
 
-We then calculate $D$ which is simply two times this difference in lof likelihoods, and calcualte a p-value with it by noting that $D$ is $\chi^2$ distributed with degrees of freedom equal to the number of parameters we're inferring (here, just one -- corresponding to the mean). 
+We then calculate $D$ which is simply two times this difference in lof likelihoods, and calcualte a p-value with it by noting that $D$ is $\chi^2$ distributed with degrees of freedom equal to the number of parameters we're inferring (here, just one -- corresponding to the mean).
 
 ```{r}
 D      <- 2 *  (pull(MLE, lnLik) -   lnLik_uphill%>% filter(mu == 0 ) %>% pull(lnLik)  )
@@ -652,14 +652,14 @@ We often can are about how probable our model is given the data, not the opposit
 - $P(Data)$. The probability of our data, called the evidence. We find this  through the law of total probability.  
 
 
-Today, we'll arbitrarily pick a prior probability. This is a bad thing to do -- out Bayesian inferences are only meaningful to the extent that a meaningfully interpret the posterior, and this relies on a reasonable prior. But we're doing it as an example:   -- say our prior is that this is normally distributed around 0 with a standard deviation of 30. 
+Today, we'll arbitrarily pick a prior probability. This is a bad thing to do -- out Bayesian inferences are only meaningful to the extent that a meaningfully interpret the posterior, and this relies on a reasonable prior. But we're doing it as an example:   -- say our prior is that this is normally distributed around 0 with a standard deviation of 30.
 
 ```{r}
 bayes_uphill <- lnLik_uphill %>%
   mutate(lik   = exp(lnLik),
          prior = dnorm(x = mu, mean = 0, sd = 30) / sum(dnorm(x = mu, mean = 0, sd = 30) ),
          evidence  = sum(lik * prior),
-         posterior =  (lik *  prior) / evidence) 
+         posterior =  (lik *  prior) / evidence)
 ```
 
 ```{r, echo=FALSE}
@@ -669,15 +669,15 @@ DT::datatable(bayes_uphill %>% filter(mu%%1==0),
 ```
 
 ```{r, echo=FALSE, fig.height=2, fig.width=4}
-bayes_uphill %>% 
-  dplyr::select(mu, prior, posterior) %>% 
-  pivot_longer(cols = c('prior','posterior'), names_to = "prob",values_to = "probability") %>% 
-  ggplot(aes(x = mu, y = probability, color = prob)) + 
+bayes_uphill %>%
+  dplyr::select(mu, prior, posterior) %>%
+  pivot_longer(cols = c('prior','posterior'), names_to = "prob",values_to = "probability") %>%
+  ggplot(aes(x = mu, y = probability, color = prob)) +
   geom_line()+
   labs(title = 'Comparing prior and posterior')
 ```
 
-**We can grab interesting thing from the posterior distribution.** 
+**We can grab interesting thing from the posterior distribution.**
 
 - For example we can find the maximum a posteriori (MAP) estimate as  
 
@@ -702,7 +702,7 @@ bayes_uphill %>%
 #### Prior sensitivity  {-}  
 
 In a good world  our priors are well calibrated.  
-In a better world, the evidence in the data is so strong, that our priors don't matter. 
+In a better world, the evidence in the data is so strong, that our priors don't matter.
 
 A good thing to do is to compare our posterior distributions across different prior models. The plot below shows that if our prior is very tight, we have trouble moving the posterior away from it.  Another way to say this, is that if your prior believe is strong, it would take loads of evidence to gr you to change it.
 
@@ -732,10 +732,10 @@ lnLik_uphill %>%
          evidence  = sum(lik * prior),
          posterior =  (lik *  prior) / evidence,
          prior_model  = "U(-100, 200)") ) %>%
-    dplyr::select(mu, prior, posterior, prior_model) %>% 
-  pivot_longer(cols = c('prior','posterior'), names_to = "prob",values_to = "probability") %>% 
+    dplyr::select(mu, prior, posterior, prior_model) %>%
+  pivot_longer(cols = c('prior','posterior'), names_to = "prob",values_to = "probability") %>%
   mutate(prior_model = fct_relevel(prior_model, "N(30, 1^2)", after = 0))%>%
-  ggplot(aes(x = mu, y = probability, color = prob)) + 
+  ggplot(aes(x = mu, y = probability, color = prob)) +
   geom_line()+
   labs(title = 'Comparing across priors')+
   facet_wrap(~prior_model, ncol = 1)
@@ -744,17 +744,17 @@ lnLik_uphill %>%
 
 **MCMC / STAN / brms**
 
-With more complex models, we usually can't use the math above to solve Bayesian problems. Rather we use computer ticks -- most notably the Markov Chain Monte Carlo [MCMC](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to approximate the posterior distribution. 
+With more complex models, we usually can't use the math above to solve Bayesian problems. Rather we use computer ticks -- most notably the Markov Chain Monte Carlo [MCMC](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to approximate the posterior distribution.
 
 The programming here can be tedious so there are many programs -- notable [WINBUGS](https://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-winbugs/), [JAGS](https://mcmc-jags.sourceforge.io/) and [STAN](https://mc-stan.org/) -- that make the computation easier. But even those can be a lot of work. **Here I use the R package [brms](https://paul-buerkner.github.io/brms/), which runs stan for us, to do an MCMC and do Bayesian stats.**  I suggest [looking into this](https://paul-buerkner.github.io/brms/) if you want to get stared, and learning STAN for more serious analyses
 
 
 ```{r, echo=FALSE, eval=FALSE,message=FALSE, warning=FALSE}
 library(brms)
-change.fit <- brm(elevationalRangeShift ~ 1, 
+change.fit <- brm(elevationalRangeShift ~ 1,
 	data   = range_shift,
 	family = gaussian(),
-	prior  = set_prior("normal(0, 30)", 
+	prior  = set_prior("normal(0, 30)",
                       class = "Intercept"),
 	chains = 4,
 	iter   = 5000)
@@ -763,10 +763,10 @@ save(change.fit,file = "data/elevation_brm.Robj")
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 library(brms)
-change.fit <- brm(elevationalRangeShift ~ 1, 
+change.fit <- brm(elevationalRangeShift ~ 1,
 	data   = range_shift,
 	family = gaussian(),
-	prior  = set_prior("normal(0, 30)", 
+	prior  = set_prior("normal(0, 30)",
                       class = "Intercept"),
 	chains = 4,
 	iter   = 5000)
