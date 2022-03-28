@@ -64,7 +64,7 @@ sqrl <- read.csv("data/sqrl.csv")
 
 ```{r, fig.height=1.97, fig.width=3.5, fig.show='hold', message=FALSE, warning=FALSE}
 #first lets load the data
-sqrl - read_csv("https://raw.githubusercontent.com/ybrandvain/biostat/master/data/sqrl.csv")
+sqrl <- read_csv("https://raw.githubusercontent.com/ybrandvain/biostat/master/data/sqrl.csv")
 # now lets order data from coldest to warmest for a pretty plot
 sqrl <- mutate(sqrl, ambient_temp = fct_relevel(ambient_temp, "cold", "warm", "hot"))
 
