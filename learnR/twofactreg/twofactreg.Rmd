@@ -1,0 +1,292 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(sortable)
+library(tidyverse)
+library(ggmosaic)
+library(knitr)
+library(broom)
+library(ggforce)
+library(patchwork)
+library(ggfortify)
+knitr::opts_chunk$set(echo = FALSE)
+
+library(palmerpenguins)
+my_penguins <- penguins %>% 
+  filter(species == "Gentoo",
+         sex     == "male", 
+         island  == "Biscoe") 
+
+crickets  <- read_csv("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter16/chap16q12CricketImmunitySpermViability.csv") %>%
+  filter(spermViability>75)
+
+library(infer)
+brains <- read.csv("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter18/chap18q12NeanderthalBrainSize.csv")
+
+```
+
+# more predictors
+
+
+## set up 
+
+
+People often refer to backwards or thinking as being like a neanderthal, but it’s not clear neanderthals were dumb (in fact some evidence suggests they were smarter than humans).
+
+Until the next Encino man documentary it will be hard to know for sure. But we can compare the size of Neanderthal and human brains.
+
+
+```{r,  fig.height=2.4,fig.width=7.5, message=FALSE, warning=FALSE, message=FALSE}
+a <- ggplot(brains, aes(x = species, y = lnBrain, color = species))+
+  geom_sina(size = 2,show.legend = FALSE)+
+  scale_color_manual(values = c("pink","cornflowerblue"))+
+  stat_summary(color = "black")+
+  labs(y = "Brain mass (ln scale)",title = "a")
+
+b <- ggplot(brains, aes(x = lnMass, y = lnBrain))+
+  geom_point(size = 2, alpha = .5)+
+  geom_smooth(method = "lm", se = FALSE)+
+  labs(x = "Body mass (ln scale)",
+       y = "Brain mass (ln scale)",title = "b")
+
+c <-  ggplot(brains, aes(x = species, y = lnMass, color = species))+
+  geom_sina(size = 2,show.legend = FALSE)+
+  scale_color_manual(values = c("pink","cornflowerblue"))+
+  stat_summary(color = "black")+
+  labs(y = "Body mass (ln scale)",title = "c")
+
+a+b+c
+```
+
+
+We can see that there is no obvious relationship between species and brain size (**a**), in this sample. But brain size clearly increases with body size (**b**), and neanderthals in this sample are larger than humans (**c**). The results of simple linear models below make these points quantitatively
+
+```{r,echo=TRUE}
+lm(lnBrain ~  species, data = brains) %>% tidy()
+```
+
+
+```{r,echo=TRUE}
+lm(lnBrain ~  lnMass, data = brains) %>% tidy()
+```
+
+```{r,echo=TRUE}
+lm(lnMass ~  species, data = brains) %>% tidy()
+```
+
+
+So we definitely can’t reject the null that brain sizes don’t differ without accounting for body mass.
+
+But do neanderthals and humans have different sized brains after we account for differences in body size? Let’s find out!
+
+
+
+```{r bestorder, echo=FALSE}
+question("In a linear model relating to this problem, which is the best order for the variables?",
+  answer("lm(lnBrain ~ species + lnMass, data = brains)"),
+  answer("lm(lnBrain ~ lnMass + species, data = brains)", correct = TRUE),
+  answer("Order doesn't matter"),
+  answer("None of these are correct"),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+```
+
+Both of the following models produce the same t-values and p-values
+
+```{r spmass_v_masssp, echo=FALSE}
+lm1 <- lm(lnBrain ~  species + lnMass, data = brains)
+lm2 <- lm(lnBrain ~   lnMass + species, data = brains)
+summary.lm(lm2)
+```
+
+
+
+```{r interp1, echo=FALSE}
+quiz(caption = "Interpretation 1",
+question("Which rows above are the least usefull and potentially misleading",
+  answer("Estimate and Std. Error"),
+  answer("t value and Pr(>|t|)", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question("Which p-values allow us to draw strong conclusions (select all that apply)",
+  answer("(Intercept"),
+  answer("lnMass"),
+  answer("speciesrecent"),
+  answer("none of these", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+)
+```
+
+```{r play1, exercise=TRUE, eval = FALSE}
+
+```
+
+Use the output above to predict the brain size of a neanderthal with a `lnMass` of 4.3
+
+
+The log brain size of a neanderthal with a `lnMass` of 4.3 is predicted to have a log mass of __ (include one point past the decimal, type -99 for no answer)
+
+
+```{r neand_43, echo = FALSE}
+question_text(
+  "The brain size of a neanderthal with a `lnMass` of 4.3 is predicted to have a log mass of __ (include one point past the decimal, type -99 for no answer)",
+  answer("7.3", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+
+
+```{r play2, exercise=TRUE, eval = FALSE}
+
+```
+
+
+The brain size of a human with a `lnMass` of 4.3 is predicted to have a log mass of __ (include one point past the decimal, type -99 for no answer)
+
+
+
+```{r human_43, echo = FALSE}
+question_text(
+  "The brain size of a human with a `lnMass` of 4.3 is predicted to have a log mass of __ (include one point past the decimal, type -99 for no answer)",
+  answer("7.4", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+
+
+## Anova approach
+
+```{r}
+include_graphics("https://raw.githubusercontent.com/ybrandvain/biostat_2022/main/images/anova_style_neand.png")
+```
+
+
+
+```{r Deviation, echo=FALSE}
+quiz(caption = "Deviation",
+question("Which corresponds to total deviations?",
+  answer("a"),
+  answer("b"),
+  answer("c", correct = TRUE),
+  answer("d"),
+  answer("none of the above"),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question("Which corresponds to residual deviations?",
+  answer("a", correct = TRUE),
+  answer("b"),
+  answer("c"),
+  answer("d"),
+  answer("none of the above"),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question("Which corresponds to deviations modelled by lnMass alone?",
+  answer("a"),
+  answer("b"),
+  answer("c"),
+  answer("d", correct = TRUE),
+  answer("none of the above"),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question("Which corresponds to deviations modelled by species alone?",
+  answer("a"),
+  answer("b"),
+  answer("c"),
+  answer("d"),
+  answer("none of the above", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question("Which corresponds to deviations modelled by lnMass and species?",
+  answer("a"),
+  answer("b", correct = TRUE),
+  answer("c"),
+  answer("d"),
+  answer("none of the above"),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+)
+```
+
+
+### Examine the anova table below
+
+
+```{r}
+tibble(thing = c("lnMass","species","Residuals"),
+       df = c("a","b",36),
+       Sum.Sq = c(0.1025,"c",0.1599),
+       Mean.Sq = c("d","e",0.00444),
+       F.value = c("f",6.2,""),
+       P.value = c(2.72e-05,"f",""))
+```
+
+
+
+
+
+
+```{r fillout, echo=FALSE}
+quiz(caption = "Deviation",
+question_text("d -- the mean square for lnMass -- equals (include four digits past the decimal)",
+  answer("0.1025", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question_text("e -- the mean square for species -- equals (include four digits past the decimal)",
+  answer("0.0276", correct = TRUE),
+  answer("0.0275", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question_text("f -- the p value for species -- equals (include four digits past the decimal)",
+  answer("0.0174", correct = TRUE),
+  answer("0.0175", correct = TRUE),
+   allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  ),
+question_text("r2 for the entire model equals (include two digits past the decimal)",
+  answer("0.44", correct = TRUE),
+  answer("0.45", correct = TRUE),
+  answer("0.448", correct = TRUE),
+  answer("0.449", correct = TRUE),
+  answer("0.4486", correct = TRUE),
+  allow_retry = TRUE,   
+    correct = random_praise(),
+    incorrect = random_encouragement()
+  )
+)
+```
+
+Evaluate these plot to see if data appear to meet assumptions of a linear regression
+
+```{r}
+autoplot(lm2)
+```
+
