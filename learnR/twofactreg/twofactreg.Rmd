@@ -17,10 +17,10 @@ library(ggfortify)
 knitr::opts_chunk$set(echo = FALSE)
 
 library(palmerpenguins)
-my_penguins <- penguins %>% 
+my_penguins <- penguins %>%
   filter(species == "Gentoo",
-         sex     == "male", 
-         island  == "Biscoe") 
+         sex     == "male",
+         island  == "Biscoe")
 
 crickets  <- read_csv("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter16/chap16q12CricketImmunitySpermViability.csv") %>%
   filter(spermViability>75)
@@ -33,7 +33,7 @@ brains <- read.csv("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter18/cha
 # more predictors
 
 
-## set up 
+## set up
 
 
 People often refer to backwards or thinking as being like a neanderthal, but it’s not clear neanderthals were dumb (in fact some evidence suggests they were smarter than humans).
@@ -241,7 +241,7 @@ tibble(thing = c("lnMass","species","Residuals"),
        Sum.Sq = c(0.1025,"c",0.1599),
        Mean.Sq = c("d","e",0.00444),
        F.value = c("f",6.2,""),
-       P.value = c(2.72e-05,"f",""))
+       P.value = c(2.72e-05,"g",""))
 ```
 
 
@@ -264,7 +264,7 @@ question_text("e -- the mean square for species -- equals (include four digits p
     correct = random_praise(),
     incorrect = random_encouragement()
   ),
-question_text("f -- the p value for species -- equals (include four digits past the decimal)",
+question_text("g -- the p value for species -- equals (include four digits past the decimal)",
   answer("0.0174", correct = TRUE),
   answer("0.0175", correct = TRUE),
    allow_retry = TRUE,   
@@ -289,4 +289,3 @@ Evaluate these plot to see if data appear to meet assumptions of a linear regres
 ```{r}
 autoplot(lm2)
 ```
-
