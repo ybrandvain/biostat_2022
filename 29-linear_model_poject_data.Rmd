@@ -1,0 +1,66 @@
+# Fun data sets if you need them {#moredata}   
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(gridExtra)
+library(DT)
+library(knitr)
+library(blogdown)
+library(stringr)
+library(tweetrmd)
+library(emo)
+library(tufte)
+library(cowplot)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(ggforce)
+library(datasauRus)
+library(ggridges)
+library(randomNames)
+library(infer)
+library(tiktokrmd)
+library(ggridges)
+library(colorspace)
+library(ggfortify)
+library(broom)
+library(emojifont)
+library(magrittr)
+library(plotly)
+options(crayon.enabled = FALSE)   
+```
+
+
+
+
+## Potential data sets 
+
+Spend the weekend pushing forward on your linear model project.
+
+Recall that a major assumption of linear models is that errors are normally distributed. 
+
+Although linear models are robust to minor violations of these assumptions, they are not a good choice for a categorical response variable -- so if your early analyses had categorical response variables you probably need a  new data set. Here are some  currated options.
+
+### Consequences  of extinction {-}
+
+
+Paper: *Functional extinction of a desert rodent: implications for seed fate and vegetation dynamics.
+rodent extinction*.  [data for project](https://raw.githubusercontent.com/ybrandvain/biostat_2022/main/data/rodent_extinction.xlsx) (.xlsx format), [paper](https://onlinelibrary.wiley.com/doi/full/10.1111/ecog.01648), full data on [dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.p45p4).
+
+Image from paper [dont try to recreate this]
+
+```{r, echo=FALSE}
+include_graphics("images/rodent_extinction.png")
+```
+
+
+### Moving and other stresses might shorten telomeres  
+
+
+link to paper https://onlinelibrary.wiley.com/doi/full/10.1111/ecog.01648
+
+Migration and stress during reproduction govern telomere dynamics in a seabird
+link to data teleomre.slx
+link to paper https://royalsocietypublishing.org/doi/pdf/10.1098/rsbl.2013.0889
+
+
