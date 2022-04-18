@@ -1,0 +1,3 @@
+# Break
+
+Work on your linear model project. See you in class on simulation for power and more
